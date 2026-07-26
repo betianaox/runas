@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getLocales } from 'expo-localization';
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 
 import type { IdiomaConcreto } from '../content/paquete';
@@ -9,11 +10,24 @@ const CLAVE_ALMACENAMIENTO = 'runas:idioma';
 // contenido se sirve según el idioma *concreto* que devuelve resolverIdioma().
 export type Idioma = 'auto' | 'es' | 'en' | 'pt' | 'it';
 
-// Traduce la preferencia a un idioma concreto servible. 'auto' cae a español
-// por ahora; cuando reconstruyamos para publicar, acá se leerá el idioma del
-// sistema (expo-localization) y se mapeará a es/en/pt/it con fallback a es.
+const IDIOMAS_SOPORTADOS: IdiomaConcreto[] = ['es', 'en', 'pt', 'it'];
+
+// Traduce la preferencia a un idioma concreto servible. 'auto' lee el idioma
+// del sistema (expo-localization) y lo mapea a es/en/pt/it; cualquier otro
+// idioma del dispositivo cae a español, que es el idioma de referencia.
 export function resolverIdioma(idioma: Idioma): IdiomaConcreto {
-  return idioma === 'auto' ? 'es' : idioma;
+  if (idioma !== 'auto') {
+    return idioma;
+  }
+  try {
+    const codigo = getLocales()[0]?.languageCode as IdiomaConcreto | undefined;
+    if (codigo && IDIOMAS_SOPORTADOS.includes(codigo)) {
+      return codigo;
+    }
+  } catch {
+    // Si el módulo nativo no está disponible (p. ej. en tests), caemos a es.
+  }
+  return 'es';
 }
 
 interface IdiomaContextValor {

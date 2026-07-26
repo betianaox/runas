@@ -46,7 +46,8 @@
         {
           "androidAppId": "ca-app-pub-5829308591228932~5466272602"
         }
-      ]
+      ],
+      "expo-localization"
     ]
   }
 }
