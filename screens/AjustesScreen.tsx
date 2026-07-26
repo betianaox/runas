@@ -4,43 +4,39 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import MarcoDorado from '../components/MarcoDorado';
 import { useIdioma, type Idioma } from '../context/IdiomaContext';
+import { useTextos } from '../hooks/useTextos';
 import type { RootStackParamList } from '../navigation/types';
 
 type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Ajustes'>;
 };
 
-const IDIOMAS: { id: Idioma; etiqueta: string }[] = [
-  { id: 'auto', etiqueta: 'Español — automático' },
-  { id: 'en', etiqueta: 'English' },
-  { id: 'pt', etiqueta: 'Português' },
-  { id: 'it', etiqueta: 'Italiano' },
-];
-
-const TEXTO_DISCLAIMER =
-  'Runas es una aplicación de entretenimiento. No es adivinación ni predicción del futuro, ' +
-  'y las interpretaciones que ofrece no constituyen asesoramiento profesional (médico, legal, ' +
-  'financiero ni psicológico) ni reemplazan el criterio de cada persona. Es un espacio para la ' +
-  'reflexión, no una fuente de certezas.';
-
 export default function AjustesScreen({ navigation }: Props) {
   const { idioma, establecerIdioma } = useIdioma();
+  const t = useTextos();
+
+  const idiomas: { id: Idioma; etiqueta: string }[] = [
+    { id: 'auto', etiqueta: t.ajustes.idiomaAuto },
+    { id: 'en', etiqueta: 'English' },
+    { id: 'pt', etiqueta: 'Português' },
+    { id: 'it', etiqueta: 'Italiano' },
+  ];
 
   return (
     <View style={styles.background}>
       <MarcoDorado />
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.encabezado}>
-          <Text style={styles.titulo}>Ajustes</Text>
+          <Text style={styles.titulo}>{t.ajustes.titulo}</Text>
           <Pressable style={styles.botonCerrar} onPress={() => navigation.goBack()} hitSlop={12}>
             <Text style={styles.botonCerrarTexto}>✕</Text>
           </Pressable>
         </View>
 
         <ScrollView contentContainerStyle={styles.scroll}>
-          <Text style={styles.seccionTitulo}>Idioma</Text>
+          <Text style={styles.seccionTitulo}>{t.ajustes.seccionIdioma}</Text>
           <View style={styles.listaIdiomas}>
-            {IDIOMAS.map((opcion) => {
+            {idiomas.map((opcion) => {
               const seleccionado = opcion.id === idioma;
               return (
                 <Pressable
@@ -55,8 +51,8 @@ export default function AjustesScreen({ navigation }: Props) {
             })}
           </View>
 
-          <Text style={styles.seccionTitulo}>Sobre la app</Text>
-          <Text style={styles.disclaimer}>{TEXTO_DISCLAIMER}</Text>
+          <Text style={styles.seccionTitulo}>{t.ajustes.seccionSobre}</Text>
+          <Text style={styles.disclaimer}>{t.ajustes.disclaimer}</Text>
         </ScrollView>
       </SafeAreaView>
     </View>

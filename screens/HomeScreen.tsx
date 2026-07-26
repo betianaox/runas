@@ -8,6 +8,7 @@ import OverlaySinGemas from '../components/OverlaySinGemas';
 import { FUENTE_TITULOS } from '../constants/tipografia';
 import { useGemas } from '../context/GemasContext';
 import { useUsuario } from '../context/UsuarioContext';
+import { useTextos } from '../hooks/useTextos';
 import type { RootStackParamList } from '../navigation/types';
 
 type Props = {
@@ -17,6 +18,7 @@ type Props = {
 export default function HomeScreen({ navigation }: Props) {
   const { gemas } = useGemas();
   const { nombre, establecerNombre } = useUsuario();
+  const t = useTextos();
   const [mostrarOverlaySinGemas, setMostrarOverlaySinGemas] = useState(false);
   const [nombreIngresado, setNombreIngresado] = useState('');
 
@@ -58,14 +60,14 @@ export default function HomeScreen({ navigation }: Props) {
 
           <View style={styles.botonera}>
             <Pressable style={styles.boton} onPress={onPresionarPregunta}>
-              <Text style={styles.botonTexto}>Pregunta</Text>
+              <Text style={styles.botonTexto}>{t.home.pregunta}</Text>
             </Pressable>
 
             <Pressable
               style={styles.boton}
               onPress={() => navigation.navigate('ConsejoDelDia')}
             >
-              <Text style={styles.botonTexto}>Consejo del día</Text>
+              <Text style={styles.botonTexto}>{t.home.consejoDelDia}</Text>
             </Pressable>
           </View>
         </View>
@@ -79,11 +81,11 @@ export default function HomeScreen({ navigation }: Props) {
       <Modal visible={!nombre} transparent animationType="fade">
         <View style={styles.overlayFondo}>
           <View style={styles.overlayCard}>
-            <Text style={styles.overlayTitulo}>Bienvenido a Runas</Text>
-            <Text style={styles.overlayTexto}>¿Cómo te llamas?</Text>
+            <Text style={styles.overlayTitulo}>{t.home.bienvenidoTitulo}</Text>
+            <Text style={styles.overlayTexto}>{t.home.bienvenidoPregunta}</Text>
             <TextInput
               style={styles.inputNombre}
-              placeholder="Tu nombre"
+              placeholder={t.home.nombrePlaceholder}
               placeholderTextColor="rgba(0,0,0,0.4)"
               value={nombreIngresado}
               onChangeText={setNombreIngresado}
@@ -95,7 +97,7 @@ export default function HomeScreen({ navigation }: Props) {
               onPress={onContinuarBienvenida}
               disabled={!nombreIngresado.trim()}
             >
-              <Text style={styles.botonContinuarTexto}>Continuar</Text>
+              <Text style={styles.botonContinuarTexto}>{t.home.continuar}</Text>
             </Pressable>
           </View>
         </View>

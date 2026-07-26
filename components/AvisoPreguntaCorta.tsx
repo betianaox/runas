@@ -1,5 +1,7 @@
 import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 
+import { useTextos } from '../hooks/useTextos';
+
 interface Props {
   visible: boolean;
   onTirarIgual: () => void;
@@ -10,20 +12,18 @@ interface Props {
 // invita a dar más contexto para una lectura más precisa. La decisión queda
 // en la persona.
 export default function AvisoPreguntaCorta({ visible, onTirarIgual, onEscribirMas }: Props) {
+  const t = useTextos();
   return (
     <Modal visible={visible} transparent animationType="fade" onRequestClose={onEscribirMas}>
       <View style={styles.fondo}>
         <View style={styles.card}>
-          <Text style={styles.titulo}>Tu pregunta es muy corta</Text>
-          <Text style={styles.texto}>
-            Cuéntanos un poco más sobre lo que quieres saber y las runas te responderán con más
-            precisión.
-          </Text>
+          <Text style={styles.titulo}>{t.avisoCorta.titulo}</Text>
+          <Text style={styles.texto}>{t.avisoCorta.texto}</Text>
           <Pressable style={styles.botonPrincipal} onPress={onEscribirMas}>
-            <Text style={styles.botonPrincipalTexto}>Escribir más</Text>
+            <Text style={styles.botonPrincipalTexto}>{t.avisoCorta.escribirMas}</Text>
           </Pressable>
           <Pressable onPress={onTirarIgual}>
-            <Text style={styles.botonSecundario}>Tirar igual</Text>
+            <Text style={styles.botonSecundario}>{t.avisoCorta.tirarIgual}</Text>
           </Pressable>
         </View>
       </View>

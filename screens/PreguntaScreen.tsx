@@ -20,6 +20,7 @@ import OverlaySinGemas from '../components/OverlaySinGemas';
 import { FUENTE_TITULOS } from '../constants/tipografia';
 import { useGemas } from '../context/GemasContext';
 import { useIdioma } from '../context/IdiomaContext';
+import { useTextos } from '../hooks/useTextos';
 import { imagenes } from '../content/imagenes';
 import { nombres } from '../content/nombres';
 import type { Tema } from '../content/types';
@@ -28,12 +29,7 @@ import { armarLectura, type Lectura } from '../lib/armarLectura';
 import { calcularTamanoRuna } from '../lib/tamanoRuna';
 import { tirarUnaRuna, type RunaTirada } from '../lib/tirarRunas';
 
-const TEMAS: { id: Tema; etiqueta: string }[] = [
-  { id: 'amor', etiqueta: 'Amor' },
-  { id: 'trabajo', etiqueta: 'Trabajo' },
-  { id: 'dinero', etiqueta: 'Dinero' },
-  { id: 'general', etiqueta: 'General' },
-];
+const TEMAS: Tema[] = ['amor', 'trabajo', 'dinero', 'general'];
 
 const PADDING_HORIZONTAL = 24;
 const GAP_RUNAS = 16;
@@ -43,6 +39,7 @@ const DEMORAS_REVELADO_MS = [1100, 1700, 2400];
 export default function PreguntaScreen() {
   const { gemas, gastarGema } = useGemas();
   const { idiomaConcreto } = useIdioma();
+  const t = useTextos();
   const { width } = useWindowDimensions();
   const [temaElegido, setTemaElegido] = useState<Tema>('amor');
   const [pregunta, setPregunta] = useState('');
@@ -203,22 +200,22 @@ export default function PreguntaScreen() {
 
             <Pressable style={styles.botonPrincipal} onPress={onNuevaPregunta}>
               <Text style={styles.botonPrincipalTexto} numberOfLines={1}>
-                Hacer otra pregunta
+                {t.pregunta.hacerOtra}
               </Text>
             </Pressable>
           </View>
         ) : (
           <ScrollView contentContainerStyle={styles.scroll} keyboardShouldPersistTaps="handled">
-            <Text style={styles.titulo}>¿Sobre qué quieres preguntar?</Text>
+            <Text style={styles.titulo}>{t.pregunta.titulo}</Text>
 
             <View style={styles.filaChips}>
               {TEMAS.map((tema) => {
-                const seleccionado = tema.id === temaElegido;
+                const seleccionado = tema === temaElegido;
                 return (
                   <Pressable
-                    key={tema.id}
+                    key={tema}
                     onPress={() => {
-                      setTemaElegido(tema.id);
+                      setTemaElegido(tema);
                       setTemaTocadoManual(true);
                     }}
                     style={[styles.chip, seleccionado && styles.chipSeleccionado]}
@@ -227,7 +224,7 @@ export default function PreguntaScreen() {
                       style={[styles.chipTexto, seleccionado && styles.chipTextoSeleccionado]}
                       numberOfLines={1}
                     >
-                      {tema.etiqueta}
+                      {t.pregunta.chips[tema]}
                     </Text>
                   </Pressable>
                 );
@@ -236,7 +233,7 @@ export default function PreguntaScreen() {
 
             <TextInput
               style={styles.input}
-              placeholder="Escribe tu pregunta..."
+              placeholder={t.pregunta.placeholder}
               placeholderTextColor="rgba(255,255,255,0.5)"
               value={pregunta}
               onChangeText={setPregunta}
@@ -244,11 +241,7 @@ export default function PreguntaScreen() {
               numberOfLines={4}
             />
 
-            {mostrarHintCorta && (
-              <Text style={styles.hintCorta}>
-                Escribe una pregunta un poco más larga para poder leerla.
-              </Text>
-            )}
+            {mostrarHintCorta && <Text style={styles.hintCorta}>{t.pregunta.hintCorta}</Text>}
 
             <Pressable
               style={[
@@ -260,7 +253,7 @@ export default function PreguntaScreen() {
               disabled={!preguntaEsValida}
             >
               <Text style={styles.botonPrincipalTexto} numberOfLines={1}>
-                Tirar las runas
+                {t.pregunta.tirar}
               </Text>
               <View style={styles.pillCosto}>
                 <Text style={styles.pillCostoTexto} numberOfLines={1}>

@@ -2,6 +2,7 @@ import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { useGemas } from '../context/GemasContext';
 import { useAnuncioRecompensado } from '../hooks/useAnuncioRecompensado';
+import { useTextos } from '../hooks/useTextos';
 
 interface Props {
   visible: boolean;
@@ -11,6 +12,7 @@ interface Props {
 export default function OverlaySinGemas({ visible, onCerrar }: Props) {
   const { ganarGema } = useGemas();
   const { listo, mostrar } = useAnuncioRecompensado();
+  const t = useTextos();
 
   const onVerVideo = () => {
     if (!listo) {
@@ -24,19 +26,19 @@ export default function OverlaySinGemas({ visible, onCerrar }: Props) {
     <Modal visible={visible} transparent animationType="fade" onRequestClose={onCerrar}>
       <View style={styles.overlayFondo}>
         <View style={styles.overlayCard}>
-          <Text style={styles.overlayTitulo}>Te quedan 0 gemas</Text>
-          <Text style={styles.overlayTexto}>Ver un video corto para ganar una gema</Text>
+          <Text style={styles.overlayTitulo}>{t.overlaySinGemas.titulo}</Text>
+          <Text style={styles.overlayTexto}>{t.overlaySinGemas.texto}</Text>
           <Pressable
             style={[styles.botonVideo, !listo && styles.botonVideoDeshabilitado]}
             onPress={onVerVideo}
             disabled={!listo}
           >
             <Text style={styles.botonVideoTexto}>
-              {listo ? '🎬 Ver video' : 'Cargando video…'}
+              {listo ? t.overlaySinGemas.verVideo : t.overlaySinGemas.cargando}
             </Text>
           </Pressable>
           <Pressable onPress={onCerrar}>
-            <Text style={styles.overlayCerrar}>Ahora no</Text>
+            <Text style={styles.overlayCerrar}>{t.overlaySinGemas.ahoraNo}</Text>
           </Pressable>
         </View>
       </View>

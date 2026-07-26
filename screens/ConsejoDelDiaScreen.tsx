@@ -7,6 +7,7 @@ import ContadorGemas from '../components/ContadorGemas';
 import MarcoDorado from '../components/MarcoDorado';
 import { FUENTE_TITULOS } from '../constants/tipografia';
 import { useIdioma } from '../context/IdiomaContext';
+import { useTextos } from '../hooks/useTextos';
 import { imagenes } from '../content/imagenes';
 import { nombres } from '../content/nombres';
 import type { ConsejoDelDia } from '../lib/armarConsejoDelDia';
@@ -23,6 +24,7 @@ type Props = {
 export default function ConsejoDelDiaScreen({ navigation }: Props) {
   const [consejo, setConsejo] = useState<ConsejoDelDia | null>(null);
   const { idiomaConcreto } = useIdioma();
+  const t = useTextos();
   const { width } = useWindowDimensions();
   const tamRuna = calcularTamanoRuna(width, 1, PADDING_HORIZONTAL, 0);
 
@@ -37,7 +39,7 @@ export default function ConsejoDelDiaScreen({ navigation }: Props) {
         <ContadorGemas />
 
         <View style={styles.contenido}>
-          <Text style={styles.titulo}>Consejo del día</Text>
+          <Text style={styles.titulo}>{t.consejoDelDia.titulo}</Text>
 
           {consejo && (
             <>
@@ -56,7 +58,7 @@ export default function ConsejoDelDiaScreen({ navigation }: Props) {
           )}
 
           <Pressable style={styles.botonVolver} onPress={() => navigation.goBack()}>
-            <Text style={styles.botonVolverTexto}>Volver</Text>
+            <Text style={styles.botonVolverTexto}>{t.consejoDelDia.volver}</Text>
           </Pressable>
         </View>
       </SafeAreaView>
