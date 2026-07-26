@@ -12,6 +12,7 @@ import { trabajo } from './fragmentos/trabajo';
 // Paquete de contenido en español. Es el idioma de referencia y el fallback
 // del resto mientras no estén traducidos.
 export const paqueteEs: PaqueteContenido = {
+  verbosIndividual: ['trae', 'aporta', 'señala', 'suma', 'indica', 'muestra'],
   fragmentos: { amor, trabajo, dinero, general },
   aperturasAbiertas,
   aperturasCerradas,

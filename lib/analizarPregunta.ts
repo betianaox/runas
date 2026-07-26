@@ -1,4 +1,6 @@
+import type { IdiomaConcreto } from '../content/paquete';
 import type { Modo, Tema, Tiempo, Tono } from '../content/types';
+import { obtenerDeteccion } from './bancosDeteccion';
 import { clasificarModo, clasificarTema, normalizar } from './clasificarPregunta';
 
 // Cuánta "señal" trae la pregunta escrita:
@@ -16,70 +18,8 @@ export interface AnalisisPregunta {
   mencionaTercero: boolean;
 }
 
-// Estado emocional de quien pregunta. Preocupación pesa más que impulso: si
-// alguien escribe "tengo muchas ganas pero me da miedo", conviene recibirlo
-// desde la contención antes que desde el envión.
-const marcasPreocupacion = [
-  'miedo', 'angustia', 'no se', 'no puedo', 'perdi', 'duda', 'dudas',
-  'ansiedad', 'ansiosa', 'ansioso', 'triste', 'tristeza', 'sufro', 'sufrir',
-  'preocupa', 'preocupada', 'preocupado', 'asusta', 'sola', 'solo', 'vacio',
-  'vacia', 'llorar', 'desesper', 'no aguanto', 'cansada', 'cansado', 'agotada',
-  'agotado', 'harta', 'harto', 'confundida', 'confundido', 'perdida', 'perdido',
-];
-const marcasImpulso = [
-  'quiero', 'ilusion', 'ganas', 'empezar', 'arrancar', 'oportunidad', 'deseo',
-  'sueño', 'suenio', 'ilusionada', 'ilusionado', 'entusiasmo', 'entusiasmada',
-  'entusiasmado', 'feliz', 'contenta', 'contento', 'esperanza', 'animo',
-  'animarme', 'decidida', 'decidido', 'nueva etapa', 'empiezo',
-];
-
-// Orientación temporal. Futuro pesa más que pasado ante una pregunta mixta,
-// porque una consulta suele apuntar a "qué va a pasar" aunque arranque
-// contando algo que ya ocurrió.
-const marcasFuturo = [
-  'va a', 'voy a', 'sera', 'seremos', 'vendra', 'conviene', 'deberia', 'debo',
-  'tengo que', 'futuro', 'mañana', 'manana', 'proximo', 'proxima', 'adelante',
-  'lograre', 'conseguire', 'algun dia', 'llegara', 'pasara', 'volvera',
-];
-const marcasPasado = [
-  'fue', 'era', 'paso', 'pasado', 'antes', 'mi ex', 'lo que hice', 'habia',
-  'tuve', 'estuvo', 'termino', 'se fue', 'dejo', 'arrepiento', 'arrepentida',
-  'arrepentido', 'ya no', 'solia', 'perdi', 'lo que paso',
-];
-
-// Mención de un tercero. A propósito NO incluye "él/ella" sueltos ni el
-// artículo "el": son demasiado comunes y darían falsos positivos. Nos
-// apoyamos en posesivos de vínculo y en referencias explícitas a una persona.
-const marcasTercero = [
-  'mi ex', 'mi pareja', 'mi novio', 'mi novia', 'mi jefe', 'mi jefa',
-  'mi socio', 'mi socia', 'mi amigo', 'mi amiga', 'mi marido', 'mi esposa',
-  'mi esposo', 'mi madre', 'mi padre', 'mi hermano', 'mi hermana',
-  'mi companero', 'mi compañera', 'mi compañero', 'esa persona', 'esta persona',
-  'esa chica', 'ese chico', 'alguien', 'con el', 'con ella',
-];
-
 function contieneAlguna(textoNormalizado: string, marcas: string[]): boolean {
   return marcas.some((marca) => textoNormalizado.includes(normalizar(marca).trim()));
-}
-
-function detectarTono(textoNormalizado: string): Tono {
-  if (contieneAlguna(textoNormalizado, marcasPreocupacion)) {
-    return 'preocupacion';
-  }
-  if (contieneAlguna(textoNormalizado, marcasImpulso)) {
-    return 'impulso';
-  }
-  return 'neutro';
-}
-
-function detectarTiempo(textoNormalizado: string): Tiempo {
-  if (contieneAlguna(textoNormalizado, marcasFuturo)) {
-    return 'futuro';
-  }
-  if (contieneAlguna(textoNormalizado, marcasPasado)) {
-    return 'pasado';
-  }
-  return 'presente';
 }
 
 // Piso liviano de validez: no intenta detectar gibberish (imposible sin un
@@ -100,13 +40,28 @@ function esInvalida(textoCrudo: string): boolean {
   return false;
 }
 
-export function analizarPregunta(pregunta: string): AnalisisPregunta {
+export function analizarPregunta(pregunta: string, idioma: IdiomaConcreto): AnalisisPregunta {
   const textoNormalizado = normalizar(pregunta);
-  const temaTexto = clasificarTema(pregunta);
-  const modo = clasificarModo(pregunta);
-  const tono = detectarTono(textoNormalizado);
-  const tiempo = detectarTiempo(textoNormalizado);
-  const mencionaTercero = contieneAlguna(textoNormalizado, marcasTercero);
+  const banco = obtenerDeteccion(idioma);
+  const temaTexto = clasificarTema(pregunta, idioma);
+  const modo = clasificarModo(pregunta, idioma);
+
+  // Preocupación pesa más que impulso: si alguien escribe "tengo ganas pero
+  // me da miedo", conviene recibirlo desde la contención antes que del envión.
+  const tono: Tono = contieneAlguna(textoNormalizado, banco.preocupacion)
+    ? 'preocupacion'
+    : contieneAlguna(textoNormalizado, banco.impulso)
+      ? 'impulso'
+      : 'neutro';
+
+  // Futuro pesa más que pasado ante una pregunta mixta.
+  const tiempo: Tiempo = contieneAlguna(textoNormalizado, banco.futuro)
+    ? 'futuro'
+    : contieneAlguna(textoNormalizado, banco.pasado)
+      ? 'pasado'
+      : 'presente';
+
+  const mencionaTercero = contieneAlguna(textoNormalizado, banco.tercero);
 
   let senal: Senal;
   if (esInvalida(pregunta)) {

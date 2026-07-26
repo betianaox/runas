@@ -17,6 +17,9 @@ export type IdiomaConcreto = 'es' | 'en' | 'pt' | 'it';
 // lectura sin saber en qué idioma está. Lo que NO depende de idioma (nombres
 // de runa, imágenes) queda fuera, en content/nombres.ts e imagenes.ts.
 export interface PaqueteContenido {
+  // Verbos para presentar cada runa en el párrafo individual ("Fehu trae ...").
+  // Van acá y no en el motor porque dependen del idioma.
+  verbosIndividual: string[];
   fragmentos: Partial<Record<Tema, FragmentosDeTema>>;
   aperturasAbiertas: Partial<Record<Tema, Record<Tono, string[]>>>;
   aperturasCerradas: Record<Tono, string[]>;

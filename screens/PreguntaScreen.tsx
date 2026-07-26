@@ -72,7 +72,7 @@ export default function PreguntaScreen() {
 
   const tamRuna = calcularTamanoRuna(width, 3, PADDING_HORIZONTAL, GAP_RUNAS);
 
-  const analisis = useMemo(() => analizarPregunta(pregunta), [pregunta]);
+  const analisis = useMemo(() => analizarPregunta(pregunta, idiomaConcreto), [pregunta, idiomaConcreto]);
   const preguntaEsValida = analisis.senal !== 'invalida';
   const mostrarHintCorta = pregunta.trim().length > 0 && analisis.senal === 'invalida';
 

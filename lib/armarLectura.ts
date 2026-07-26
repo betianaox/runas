@@ -5,10 +5,6 @@ import type { Modo, Tema, Tono } from '../content/types';
 import type { AnalisisPregunta } from './analizarPregunta';
 import { tirarTresRunas, type RunaTirada } from './tirarRunas';
 
-// Verbos para variar cómo se presenta cada runa en el párrafo individual,
-// para no repetir siempre "trae" tres veces seguidas.
-const VERBOS_INDIVIDUAL = ['trae', 'aporta', 'señala', 'suma', 'indica', 'muestra'];
-
 function elegirAlAzar<T>(lista: readonly T[]): T {
   return lista[Math.floor(Math.random() * lista.length)];
 }
@@ -114,7 +110,7 @@ export function armarLectura(
   const fragmentosIndividuales = versiones.map((v) => v[0]) as [string, string, string];
   const fragmentosCombinados = versiones.map((v) => v[1]) as [string, string, string];
 
-  const verbos = mezclar(VERBOS_INDIVIDUAL).slice(0, 3);
+  const verbos = mezclar(contenido.verbosIndividual).slice(0, 3);
   const parrafoIndividual = runas
     .map((runa, i) => `${nombres[runa.id]} ${verbos[i]} ${fragmentosIndividuales[i]}.`)
     .join(' ');
