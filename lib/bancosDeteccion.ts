@@ -132,10 +132,67 @@ const en: BancoDeteccion = {
   ],
 };
 
+const pt: BancoDeteccion = {
+  tema: {
+    amor: [
+      'amor', 'parceiro', 'parceira', 'relacionamento', 'relação', 'meu ex',
+      'minha ex', ' ex ', 'paixão', 'coração', 'sentimentos', 'casamento',
+      'casar', 'namoro', 'namorado', 'namorada', 'me ama', 'gosta de mim',
+      'ciúmes', 'traição', 'traiu', 'término', 'terminar', 'divórcio', 'voltar com',
+    ],
+    trabajo: [
+      'trabalho', 'emprego', 'chefe', 'demitir', 'demissão', 'pedir demissão',
+      'entrevista', 'cargo', 'escritório', 'colega', 'projeto', 'negócio',
+      'carreira', 'promoção', 'contratado', 'demitido', 'empresa',
+    ],
+    dinero: [
+      'dinheiro', 'grana', 'dívida', 'dívidas', 'poupança', 'poupar',
+      'investimento', 'investir', 'empréstimo', 'salário', 'gastar', 'gasto',
+      'compra', 'financeiro', 'finanças', 'orçamento', 'renda', 'lucro', 'contas',
+    ],
+  },
+  modoCerrada: [
+    'vai', 'vou', 'volta', 'voltará', 'devo', 'deveria', 'tenho que', 'funciona',
+    'vai dar certo', 'me ama', 'gosta de mim', 'é certo', 'é boa ideia',
+    'vale a pena', 'sim ou não', 'vai voltar', 'vou conseguir',
+  ],
+  preocupacion: [
+    'medo', 'angústia', 'não sei', 'não consigo', 'perdi', 'dúvida', 'dúvidas',
+    'ansiedade', 'ansiosa', 'ansioso', 'triste', 'tristeza', 'sofro', 'sofrer',
+    'preocupa', 'preocupada', 'preocupado', 'assusta', 'sozinha', 'sozinho',
+    'vazio', 'vazia', 'chorar', 'desesper', 'não aguento', 'cansada', 'cansado',
+    'esgotada', 'esgotado', 'confusa', 'confuso', 'perdida', 'perdido',
+  ],
+  impulso: [
+    'quero', 'vontade', 'animada', 'animado', 'começar', 'oportunidade',
+    'desejo', 'sonho', 'ilusão', 'empolgada', 'empolgado', 'entusiasmo',
+    'feliz', 'contente', 'esperança', 'ânimo', 'decidida', 'decidido',
+    'nova etapa', 'empolgação',
+  ],
+  futuro: [
+    'vai', 'vou', 'será', 'virá', 'devo', 'deveria', 'tenho que', 'futuro',
+    'amanhã', 'próximo', 'próxima', 'adiante', 'algum dia', 'vai voltar', 'vai dar',
+  ],
+  pasado: [
+    'foi', 'era', 'aconteceu', 'passado', 'antes', 'meu ex', 'minha ex',
+    'o que fiz', 'tinha', 'tive', 'terminou', 'foi embora', 'me arrependo',
+    'já não', 'costumava', 'perdi',
+  ],
+  tercero: [
+    'meu ex', 'minha ex', 'meu parceiro', 'minha parceira', 'meu namorado',
+    'minha namorada', 'meu chefe', 'minha chefe', 'meu marido', 'minha esposa',
+    'minha mãe', 'meu pai', 'meu irmão', 'minha irmã', 'meu amigo', 'minha amiga',
+    'meu colega', 'minha colega', 'essa pessoa', 'aquela pessoa', 'alguém',
+    'com ele', 'com ela', ' ele ', ' ela ',
+  ],
+};
+
 export function obtenerDeteccion(idioma: IdiomaConcreto): BancoDeteccion {
   switch (idioma) {
     case 'en':
       return en;
+    case 'pt':
+      return pt;
     default:
       return es;
   }

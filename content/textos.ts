@@ -143,7 +143,55 @@ const en: Textos = {
   },
 };
 
-const textos: Record<IdiomaConcreto, Textos> = { es, en, pt: es, it: es };
+const pt: Textos = {
+  home: {
+    pregunta: 'Fazer uma pergunta',
+    consejoDelDia: 'Conselho do dia',
+    bienvenidoTitulo: 'Bem-vindo ao Runas',
+    bienvenidoPregunta: 'Como você se chama?',
+    nombrePlaceholder: 'Seu nome',
+    continuar: 'Continuar',
+  },
+  pregunta: {
+    titulo: 'Sobre o que você quer perguntar?',
+    chips: { amor: 'Amor', trabajo: 'Trabalho', dinero: 'Dinheiro', general: 'Geral' },
+    placeholder: 'Escreva sua pergunta...',
+    tirar: 'Lançar as runas',
+    hacerOtra: 'Fazer outra pergunta',
+    hintCorta: 'Escreva uma pergunta um pouco mais longa para podermos lê-la.',
+  },
+  overlaySinGemas: {
+    titulo: 'Você tem 0 gemas',
+    texto: 'Assista a um vídeo curto para ganhar uma gema',
+    verVideo: '🎬 Assistir vídeo',
+    cargando: 'Carregando vídeo…',
+    ahoraNo: 'Agora não',
+  },
+  avisoCorta: {
+    titulo: 'Sua pergunta é muito curta',
+    texto:
+      'Conte um pouco mais sobre o que você quer saber e as runas vão responder com mais precisão.',
+    escribirMas: 'Escrever mais',
+    tirarIgual: 'Lançar mesmo assim',
+  },
+  consejoDelDia: {
+    titulo: 'Conselho do dia',
+    volver: 'Voltar',
+  },
+  ajustes: {
+    titulo: 'Configurações',
+    seccionIdioma: 'Idioma',
+    seccionSobre: 'Sobre',
+    idiomaAuto: 'Automático (idioma do sistema)',
+    disclaimer:
+      'Runas é um aplicativo de entretenimento. Não é adivinhação nem previsão do futuro, ' +
+      'e as interpretações que oferece não constituem aconselhamento profissional (médico, ' +
+      'jurídico, financeiro ou psicológico), nem substituem o seu próprio julgamento. É um ' +
+      'espaço para reflexão, não uma fonte de certezas.',
+  },
+};
+
+const textos: Record<IdiomaConcreto, Textos> = { es, en, pt, it: es };
 
 export function obtenerTextos(idioma: IdiomaConcreto): Textos {
   return textos[idioma] ?? es;
