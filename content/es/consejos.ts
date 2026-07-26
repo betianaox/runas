@@ -3,7 +3,7 @@ import type { Modo, Tema, Tono } from '../types';
 // Consejo de cierre, combinado (no por runa individual). Dividido por modo
 // (abierta/cerrada) y, dentro de cada uno, por TONO. 'neutro' es el fallback:
 // si un tono quedara vacío, armarLectura cae a 'neutro'. Acá el tono es lo que
-// más se nota: a quien pregunta preocupado conviene aquietarlo; a quien viene
+// más se nota: a quien pregunta preocupado conviene aquietarlo, a quien viene
 // con impulso, encauzarlo sin frenarlo.
 //
 // Español neutro, sin voseo, sin marcar género de quien consulta.
@@ -17,13 +17,13 @@ export const consejos: Partial<Record<Tema, Record<Modo, Record<Tono, string[]>>
         'Antes de actuar, tómate un momento para escuchar lo que realmente sientes.',
       ],
       preocupacion: [
-        'No hace falta resolver todo hoy; alcanza con no perderte en el intento.',
+        'No hace falta resolver todo hoy, alcanza con no perderte en el intento.',
         'Trata esto con la misma paciencia que tendrías con alguien que quieres.',
         'Baja la exigencia contigo: sentir dudas no es hacer algo mal.',
       ],
       impulso: [
         'Dale lugar a ese entusiasmo, pero deja que el otro también marque su ritmo.',
-        'Las ganas están bien; sostenlas sin quemar etapas.',
+        'Las ganas están bien, sostenlas sin quemar etapas.',
         'Usa ese impulso para acercarte, no para apurar una definición.',
       ],
     },
@@ -55,13 +55,13 @@ export const consejos: Partial<Record<Tema, Record<Modo, Record<Tono, string[]>>
         'Antes de actuar, tómate un momento para pensar qué necesitas realmente del trabajo.',
       ],
       preocupacion: [
-        'No cargues con todo de golpe; una cosa a la vez también es avanzar.',
+        'No cargues con todo de golpe, una cosa a la vez también es avanzar.',
         'Baja la exigencia un punto: desde ahí se piensa más claro.',
         'Lo que hoy te agobia se ordena mejor por partes que de una vez.',
       ],
       impulso: [
         'Encauza ese impulso en un primer paso concreto y sostenible.',
-        'Las ganas ayudan; que no te hagan saltear los pasos del medio.',
+        'Las ganas ayudan, que no te hagan saltear los pasos del medio.',
         'Usa la energía para ordenar el plan, no solo para arrancar.',
       ],
     },
@@ -75,7 +75,7 @@ export const consejos: Partial<Record<Tema, Record<Modo, Record<Tono, string[]>>
       preocupacion: [
         'Antes de definir, ordena los datos: la decisión pesa menos con la cabeza fría.',
         'Un paso medido calma más que apurar una salida por miedo.',
-        'No decidas desde el cansancio; date un rato antes de resolver.',
+        'No decidas desde el cansancio, date un rato antes de resolver.',
       ],
       impulso: [
         'Si la oportunidad es real, da el paso en vez de solo entusiasmarte.',
@@ -113,10 +113,10 @@ export const consejos: Partial<Record<Tema, Record<Modo, Record<Tono, string[]>>
       preocupacion: [
         'Antes de decidir, mira el número real: casi siempre asusta menos de lejos.',
         'Un paso pequeño y seguro ordena más que una jugada apurada.',
-        'No resuelvas lo económico desde el susto; primero los datos.',
+        'No resuelvas lo económico desde el susto, primero los datos.',
       ],
       impulso: [
-        'Si la cuenta cierra, avanza; si no, espera sin perder el impulso.',
+        'Si la cuenta cierra, avanza, si no, espera sin perder el impulso.',
         'Aprovecha las ganas para ordenar, no solo para gastar.',
         'Muévete con ese impulso, pero dejando un margen por las dudas.',
       ],
@@ -131,13 +131,13 @@ export const consejos: Partial<Record<Tema, Record<Modo, Record<Tono, string[]>>
         'Antes de actuar, tómate un momento para escuchar lo que realmente necesitas.',
       ],
       preocupacion: [
-        'No tienes que resolverlo todo hoy; alcanza con dar un paso a la vez.',
+        'No tienes que resolverlo todo hoy, alcanza con dar un paso a la vez.',
         'Trátate con un poco de la paciencia que tendrías con otra persona.',
         'Lo que hoy te pesa se afloja cuando dejas de exigirte tenerlo resuelto.',
       ],
       impulso: [
         'Dale lugar a ese impulso, pero apóyalo en un primer paso concreto.',
-        'Las ganas son buena señal; sostenlas sin apurar el proceso.',
+        'Las ganas son buena señal, sostenlas sin apurar el proceso.',
         'Usa la energía para empezar por algo pequeño y real.',
       ],
     },

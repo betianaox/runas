@@ -29,7 +29,10 @@ import { armarLectura, type Lectura } from '../lib/armarLectura';
 import { calcularTamanoRuna } from '../lib/tamanoRuna';
 import { tirarUnaRuna, type RunaTirada } from '../lib/tirarRunas';
 
-const TEMAS: Tema[] = ['amor', 'trabajo', 'dinero', 'general'];
+// General primero y como default: si la pregunta no permite detectar un tema,
+// se queda en general (respuesta genérica) en vez de contestar de amor a algo
+// que no lo es. El autoajuste solo cambia el chip cuando detecta otro tema.
+const TEMAS: Tema[] = ['general', 'amor', 'trabajo', 'dinero'];
 
 const PADDING_HORIZONTAL = 24;
 const GAP_RUNAS = 16;
@@ -41,7 +44,7 @@ export default function PreguntaScreen() {
   const { idiomaConcreto } = useIdioma();
   const t = useTextos();
   const { width } = useWindowDimensions();
-  const [temaElegido, setTemaElegido] = useState<Tema>('amor');
+  const [temaElegido, setTemaElegido] = useState<Tema>('general');
   const [pregunta, setPregunta] = useState('');
   const [lectura, setLectura] = useState<Lectura | null>(null);
   const [revelado, setRevelado] = useState([false, false, false]);
@@ -142,6 +145,12 @@ export default function PreguntaScreen() {
   };
 
   const onNuevaPregunta = () => {
+    // Sin gemas, "hacer otra pregunta" hace lo mismo que "tirar las runas":
+    // ofrece el video en vez de mandar a un formulario que no va a poder usar.
+    if (gemas <= 0) {
+      setMostrarOverlaySinGemas(true);
+      return;
+    }
     limpiarAnimacion();
     setLectura(null);
     setPregunta('');
@@ -192,7 +201,7 @@ export default function PreguntaScreen() {
                 <Text style={styles.textoLectura}>{lectura.parrafoIntegrador}</Text>
               </ScrollView>
               <LinearGradient
-                colors={['rgba(12, 47, 88, 0)', 'rgba(12, 47, 88, 0.95)']}
+                colors={['rgba(12, 47, 88, 0)', 'rgba(12, 47, 88, 0.5)']}
                 style={styles.degradeInferior}
                 pointerEvents="none"
               />
@@ -289,12 +298,15 @@ const styles = StyleSheet.create({
   },
   safeArea: {
     flex: 1,
+    // Aire respecto del marco dorado, arriba y abajo (la home no lleva marco).
+    paddingTop: 14,
+    paddingBottom: 14,
   },
   scroll: {
     flexGrow: 1,
     justifyContent: 'center',
     paddingHorizontal: PADDING_HORIZONTAL,
-    paddingVertical: 32,
+    paddingVertical: 24,
     gap: 24,
   },
   titulo: {
@@ -384,7 +396,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: PADDING_HORIZONTAL + 8,
     paddingTop: 20,
-    paddingBottom: 36,
+    paddingBottom: 24,
     gap: 16,
   },
   filaRunas: {
@@ -425,7 +437,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    height: 40,
+    height: 28,
     borderBottomLeftRadius: 16,
     borderBottomRightRadius: 16,
   },

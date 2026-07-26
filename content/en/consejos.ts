@@ -2,7 +2,7 @@ import type { Modo, Tema, Tono } from '../types';
 
 // Closing advice, combined (not per rune). Split by mode (open/closed) and,
 // within each, by TONE. 'neutro' is the fallback. Tone matters most here: a
-// worried querent is best settled; an eager one, guided without being stopped.
+// worried querent is best settled, an eager one, guided without being stopped.
 // Neutral English, no gendered wording.
 export const consejos: Partial<Record<Tema, Record<Modo, Record<Tono, string[]>>>> = {
   amor: {
@@ -14,13 +14,13 @@ export const consejos: Partial<Record<Tema, Record<Modo, Record<Tono, string[]>>
         'Before acting, take a moment to listen to what you truly feel.',
       ],
       preocupacion: [
-        'You do not have to solve it all today; it is enough not to lose yourself in the process.',
+        'You do not have to solve it all today, it is enough not to lose yourself in the process.',
         'Treat this with the same patience you would give someone you care about.',
         'Ease up on yourself: feeling doubt is not doing something wrong.',
       ],
       impulso: [
         'Make room for that enthusiasm, but let the other person set their pace too.',
-        'The eagerness is fine; hold on to it without rushing the steps.',
+        'The eagerness is fine, hold on to it without rushing the steps.',
         'Use that momentum to get closer, not to force a definition.',
       ],
     },
@@ -52,13 +52,13 @@ export const consejos: Partial<Record<Tema, Record<Modo, Record<Tono, string[]>>
         'Before acting, take a moment to think about what you truly need from work.',
       ],
       preocupacion: [
-        'Do not carry it all at once; one thing at a time is progress too.',
+        'Do not carry it all at once, one thing at a time is progress too.',
         'Ease the pressure a notch: you think more clearly from there.',
         'What weighs on you today sorts out better in parts than all at once.',
       ],
       impulso: [
         'Channel that momentum into a first concrete, sustainable step.',
-        'Eagerness helps; do not let it make you skip the steps in between.',
+        'Eagerness helps, do not let it make you skip the steps in between.',
         'Use the energy to sort out the plan, not just to get started.',
       ],
     },
@@ -72,7 +72,7 @@ export const consejos: Partial<Record<Tema, Record<Modo, Record<Tono, string[]>>
       preocupacion: [
         'Before deciding, sort out the facts: the choice weighs less with a cool head.',
         'A measured step calms more than rushing an exit out of fear.',
-        'Do not decide out of exhaustion; give yourself a moment before resolving.',
+        'Do not decide out of exhaustion, give yourself a moment before resolving.',
       ],
       impulso: [
         'If the opportunity is real, take the step instead of only feeling excited.',
@@ -110,10 +110,10 @@ export const consejos: Partial<Record<Tema, Record<Modo, Record<Tono, string[]>>
       preocupacion: [
         'Before deciding, look at the real number: it almost always frightens less up close.',
         'A small, safe step sorts things out more than a rushed move.',
-        'Do not resolve money matters out of fright; the facts come first.',
+        'Do not resolve money matters out of fright, the facts come first.',
       ],
       impulso: [
-        'If the numbers add up, move forward; if not, wait without losing the momentum.',
+        'If the numbers add up, move forward, if not, wait without losing the momentum.',
         'Use the eagerness to get organized, not just to spend.',
         'Move with that momentum, while keeping a margin just in case.',
       ],
@@ -128,13 +128,13 @@ export const consejos: Partial<Record<Tema, Record<Modo, Record<Tono, string[]>>
         'Before acting, take a moment to listen to what you truly need.',
       ],
       preocupacion: [
-        'You do not have to solve it all today; it is enough to take one step at a time.',
+        'You do not have to solve it all today, it is enough to take one step at a time.',
         'Treat yourself with a little of the patience you would give someone else.',
         'What weighs on you today eases when you stop demanding it be resolved.',
       ],
       impulso: [
         'Make room for that momentum, but rest it on a first concrete step.',
-        'Eagerness is a good sign; hold on to it without rushing the process.',
+        'Eagerness is a good sign, hold on to it without rushing the process.',
         'Use the energy to start with something small and real.',
       ],
     },

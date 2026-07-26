@@ -30,7 +30,7 @@ export const consejoDelDia: Record<RunaId, Record<Posicion, string[]>> = {
     normal: [
       'Today you have more strength than you think.',
       'It is a good moment to take on something you had been putting off out of tiredness.',
-      "Today's vitality is enough for a brave step; it does not have to be a giant one.",
+      "Today's vitality is enough for a brave step, it does not have to be a giant one.",
       'Trust your body today: it has more stamina than the mind usually admits.',
       'Today is a good day to stop waiting for the perfect moment and start as you are.',
       'If something scares you today, it is a sign that it matters — not that you cannot do it.',
@@ -109,7 +109,7 @@ export const consejoDelDia: Record<RunaId, Record<Posicion, string[]>> = {
       'Today may feel like going in circles — a good moment to stop and look at the map.',
       'If the road feels heavy today, maybe you are carrying something you no longer need to.',
       'Today it is worth asking whether you follow that course out of conviction or out of habit.',
-      'A detour today is not a failure; it may be exactly what was missing.',
+      'A detour today is not a failure, it may be exactly what was missing.',
       'If you feel others are moving ahead and you are not, remember that not all paths go at the same pace.',
       'Today is a good day to slow down rather than insist on a course that no longer convinces you.',
     ],

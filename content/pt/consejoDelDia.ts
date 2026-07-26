@@ -108,7 +108,7 @@ export const consejoDelDia: Record<RunaId, Record<Posicion, string[]>> = {
       'Hoje pode parecer que você anda em círculos — um bom momento para parar e olhar o mapa.',
       'Se o caminho de hoje parece pesado, talvez você esteja carregando algo que já não precisa levar.',
       'Hoje convém se perguntar se você segue esse rumo por convicção ou por costume.',
-      'Um desvio hoje não é um fracasso; pode ser justamente o que faltava.',
+      'Um desvio hoje não é um fracasso, pode ser justamente o que faltava.',
       'Se você sente que outros avançam e você não, lembre que nem todos os caminhos vão no mesmo ritmo.',
       'Hoje é um bom dia para diminuir a velocidade em vez de insistir num rumo que já não convence.',
     ],

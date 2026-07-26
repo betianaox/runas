@@ -13,13 +13,13 @@ export const consejos: Partial<Record<Tema, Record<Modo, Record<Tono, string[]>>
         "Prima di agire, prenditi un momento per ascoltare ciò che senti davvero.",
       ],
       preocupacion: [
-        "Non devi risolvere tutto oggi; basta non perderti nel processo.",
+        "Non devi risolvere tutto oggi, basta non perderti nel processo.",
         "Tratta questo con la stessa pazienza che avresti con qualcuno a cui tieni.",
         "Allenta la pressione su te stesso: sentire dei dubbi non è sbagliare.",
       ],
       impulso: [
         "Fai spazio a quell'entusiasmo, ma lascia che anche l'altro segua il suo ritmo.",
-        "La voglia va bene; sostienila senza bruciare le tappe.",
+        "La voglia va bene, sostienila senza bruciare le tappe.",
         "Usa quello slancio per avvicinarti, non per forzare una definizione.",
       ],
     },
@@ -51,13 +51,13 @@ export const consejos: Partial<Record<Tema, Record<Modo, Record<Tono, string[]>>
         "Prima di agire, prenditi un momento per pensare a ciò che ti serve davvero dal lavoro.",
       ],
       preocupacion: [
-        "Non caricarti tutto in una volta; una cosa alla volta è comunque avanzare.",
+        "Non caricarti tutto in una volta, una cosa alla volta è comunque avanzare.",
         "Allenta un po' la pressione: da lì pensi più lucido.",
         "Ciò che oggi ti sovraccarica si sistema meglio a pezzi che tutto insieme.",
       ],
       impulso: [
         "Incanala quello slancio in un primo passo concreto e sostenibile.",
-        "La voglia aiuta; che non ti faccia saltare le tappe intermedie.",
+        "La voglia aiuta, che non ti faccia saltare le tappe intermedie.",
         "Usa l'energia per organizzare il piano, non solo per iniziare.",
       ],
     },
@@ -71,7 +71,7 @@ export const consejos: Partial<Record<Tema, Record<Modo, Record<Tono, string[]>>
       preocupacion: [
         "Prima di decidere, metti in ordine i dati: la scelta pesa meno a mente fredda.",
         "Un passo misurato calma più che affrettare un'uscita per paura.",
-        "Non decidere per la stanchezza; concediti un momento prima di risolvere.",
+        "Non decidere per la stanchezza, concediti un momento prima di risolvere.",
       ],
       impulso: [
         "Se l'opportunità è reale, fai il passo invece di limitarti a entusiasmarti.",
@@ -109,10 +109,10 @@ export const consejos: Partial<Record<Tema, Record<Modo, Record<Tono, string[]>>
       preocupacion: [
         "Prima di decidere, guarda il numero reale: da vicino spaventa quasi sempre meno.",
         "Un passo piccolo e sicuro sistema più di una mossa affrettata.",
-        "Non risolvere le finanze per lo spavento; prima i dati.",
+        "Non risolvere le finanze per lo spavento, prima i dati.",
       ],
       impulso: [
-        "Se i conti tornano, vai avanti; se no, aspetta senza perdere lo slancio.",
+        "Se i conti tornano, vai avanti, se no, aspetta senza perdere lo slancio.",
         "Usa la voglia per organizzarti, non solo per spendere.",
         "Muoviti con quello slancio, tenendo un margine per sicurezza.",
       ],
@@ -127,13 +127,13 @@ export const consejos: Partial<Record<Tema, Record<Modo, Record<Tono, string[]>>
         "Prima di agire, prenditi un momento per ascoltare ciò di cui hai davvero bisogno.",
       ],
       preocupacion: [
-        "Non devi risolvere tutto oggi; basta fare un passo alla volta.",
+        "Non devi risolvere tutto oggi, basta fare un passo alla volta.",
         "Trattati con un po' della pazienza che avresti con un'altra persona.",
         "Ciò che oggi ti pesa si allenta quando smetti di pretendere di averlo risolto.",
       ],
       impulso: [
         "Fai spazio a quello slancio, ma appoggialo su un primo passo concreto.",
-        "La voglia è un buon segno; sostienila senza affrettare il processo.",
+        "La voglia è un buon segno, sostienila senza affrettare il processo.",
         "Usa l'energia per iniziare da qualcosa di piccolo e reale.",
       ],
     },

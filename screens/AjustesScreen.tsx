@@ -15,8 +15,11 @@ export default function AjustesScreen({ navigation }: Props) {
   const { idioma, establecerIdioma } = useIdioma();
   const t = useTextos();
 
+  // Automático primero, y debajo todas las lenguas explícitas (incluido
+  // Español) para que se puedan elegir aunque el automático ya sea una de ellas.
   const idiomas: { id: Idioma; etiqueta: string }[] = [
     { id: 'auto', etiqueta: t.ajustes.idiomaAuto },
+    { id: 'es', etiqueta: 'Español' },
     { id: 'en', etiqueta: 'English' },
     { id: 'pt', etiqueta: 'Português' },
     { id: 'it', etiqueta: 'Italiano' },
@@ -66,13 +69,16 @@ const styles = StyleSheet.create({
   },
   safeArea: {
     flex: 1,
+    // Aire respecto del marco dorado, arriba y abajo.
+    paddingTop: 14,
+    paddingBottom: 14,
   },
   encabezado: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 24,
-    paddingTop: 16,
+    paddingTop: 6,
   },
   titulo: {
     color: '#fff',

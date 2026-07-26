@@ -13,13 +13,13 @@ export const consejos: Partial<Record<Tema, Record<Modo, Record<Tono, string[]>>
         'Antes de agir, reserve um momento para escutar o que você realmente sente.',
       ],
       preocupacion: [
-        'Você não precisa resolver tudo hoje; basta não se perder no processo.',
+        'Você não precisa resolver tudo hoje, basta não se perder no processo.',
         'Trate isto com a mesma paciência que teria com alguém de quem você gosta.',
         'Alivie a cobrança consigo: sentir dúvida não é fazer algo errado.',
       ],
       impulso: [
         'Dê espaço para esse entusiasmo, mas deixe o outro marcar o ritmo dele também.',
-        'A vontade é boa; sustente-a sem queimar etapas.',
+        'A vontade é boa, sustente-a sem queimar etapas.',
         'Use esse impulso para se aproximar, não para forçar uma definição.',
       ],
     },
@@ -51,13 +51,13 @@ export const consejos: Partial<Record<Tema, Record<Modo, Record<Tono, string[]>>
         'Antes de agir, reserve um momento para pensar o que você realmente precisa do trabalho.',
       ],
       preocupacion: [
-        'Não carregue tudo de uma vez; uma coisa de cada vez também é avançar.',
+        'Não carregue tudo de uma vez, uma coisa de cada vez também é avançar.',
         'Alivie a cobrança um pouco: a partir daí você pensa mais claro.',
         'O que hoje te sobrecarrega se organiza melhor por partes do que de uma vez.',
       ],
       impulso: [
         'Canalize esse impulso num primeiro passo concreto e sustentável.',
-        'A vontade ajuda; que ela não te faça pular as etapas do meio.',
+        'A vontade ajuda, que ela não te faça pular as etapas do meio.',
         'Use a energia para organizar o plano, não só para começar.',
       ],
     },
@@ -71,7 +71,7 @@ export const consejos: Partial<Record<Tema, Record<Modo, Record<Tono, string[]>>
       preocupacion: [
         'Antes de definir, organize os dados: a decisão pesa menos com a cabeça fria.',
         'Um passo medido acalma mais do que apressar uma saída por medo.',
-        'Não decida pelo cansaço; dê um tempo a si antes de resolver.',
+        'Não decida pelo cansaço, dê um tempo a si antes de resolver.',
       ],
       impulso: [
         'Se a oportunidade é real, dê o passo em vez de só se empolgar.',
@@ -109,10 +109,10 @@ export const consejos: Partial<Record<Tema, Record<Modo, Record<Tono, string[]>>
       preocupacion: [
         'Antes de decidir, olhe o número real: quase sempre assusta menos de perto.',
         'Um passo pequeno e seguro organiza mais do que uma jogada apressada.',
-        'Não resolva o financeiro pelo susto; primeiro os dados.',
+        'Não resolva o financeiro pelo susto, primeiro os dados.',
       ],
       impulso: [
-        'Se as contas fecham, avance; se não, espere sem perder o impulso.',
+        'Se as contas fecham, avance, se não, espere sem perder o impulso.',
         'Use a vontade para organizar, não só para gastar.',
         'Mova-se com esse impulso, mantendo uma margem por via das dúvidas.',
       ],
@@ -127,13 +127,13 @@ export const consejos: Partial<Record<Tema, Record<Modo, Record<Tono, string[]>>
         'Antes de agir, reserve um momento para escutar o que você realmente precisa.',
       ],
       preocupacion: [
-        'Você não precisa resolver tudo hoje; basta dar um passo de cada vez.',
+        'Você não precisa resolver tudo hoje, basta dar um passo de cada vez.',
         'Trate-se com um pouco da paciência que teria com outra pessoa.',
         'O que hoje te pesa se alivia quando você para de se cobrar tê-lo resolvido.',
       ],
       impulso: [
         'Dê espaço para esse impulso, mas apoie-o num primeiro passo concreto.',
-        'A vontade é bom sinal; sustente-a sem apressar o processo.',
+        'A vontade é bom sinal, sustente-a sem apressar o processo.',
         'Use a energia para começar por algo pequeno e real.',
       ],
     },

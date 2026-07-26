@@ -2,7 +2,7 @@ import type { Posicion, RunaId } from '../types';
 
 // Consiglio del giorno: una singola runa, messaggio riflessivo generale — non
 // legato a un tema. 8 varianti per runa+posizione. Virgolette doppie per gli
-// apostrofi; virgolette singole per gli incisi interni.
+// apostrofi, virgolette singole per gli incisi interni.
 export const consejoDelDia: Record<RunaId, Record<Posicion, string[]>> = {
   fehu: {
     normal: [
@@ -109,7 +109,7 @@ export const consejoDelDia: Record<RunaId, Record<Posicion, string[]>> = {
       "Oggi può sembrare di girare a vuoto — un buon momento per fermarti e guardare la mappa.",
       "Se il cammino di oggi sembra pesante, forse stai portando qualcosa che non serve più portare.",
       "Oggi conviene chiederti se segui quella rotta per convinzione o per abitudine.",
-      "Una deviazione oggi non è un fallimento; può essere proprio ciò che mancava.",
+      "Una deviazione oggi non è un fallimento, può essere proprio ciò che mancava.",
       "Se senti che gli altri avanzano e tu no, ricorda che non tutti i cammini vanno allo stesso ritmo.",
       "Oggi è una buona giornata per rallentare invece di insistere su una rotta che non convince più.",
     ],

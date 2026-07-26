@@ -73,6 +73,9 @@ const styles = StyleSheet.create({
   },
   safeArea: {
     flex: 1,
+    // Aire respecto del marco dorado, arriba y abajo.
+    paddingTop: 14,
+    paddingBottom: 14,
   },
   contenido: {
     flex: 1,
