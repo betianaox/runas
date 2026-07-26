@@ -191,7 +191,55 @@ const pt: Textos = {
   },
 };
 
-const textos: Record<IdiomaConcreto, Textos> = { es, en, pt, it: es };
+const it: Textos = {
+  home: {
+    pregunta: "Fai una domanda",
+    consejoDelDia: "Consiglio del giorno",
+    bienvenidoTitulo: "Benvenuto in Runas",
+    bienvenidoPregunta: "Come ti chiami?",
+    nombrePlaceholder: "Il tuo nome",
+    continuar: "Continua",
+  },
+  pregunta: {
+    titulo: "Su cosa vuoi fare la domanda?",
+    chips: { amor: "Amore", trabajo: "Lavoro", dinero: "Denaro", general: "Generale" },
+    placeholder: "Scrivi la tua domanda...",
+    tirar: "Lancia le rune",
+    hacerOtra: "Fai un'altra domanda",
+    hintCorta: "Scrivi una domanda un po' più lunga per poterla leggere.",
+  },
+  overlaySinGemas: {
+    titulo: "Ti restano 0 gemme",
+    texto: "Guarda un breve video per ottenere una gemma",
+    verVideo: "🎬 Guarda il video",
+    cargando: "Caricamento video…",
+    ahoraNo: "Non ora",
+  },
+  avisoCorta: {
+    titulo: "La tua domanda è troppo breve",
+    texto:
+      "Raccontaci un po' di più su ciò che vuoi sapere e le rune risponderanno con più precisione.",
+    escribirMas: "Scrivi di più",
+    tirarIgual: "Lancia comunque",
+  },
+  consejoDelDia: {
+    titulo: "Consiglio del giorno",
+    volver: "Indietro",
+  },
+  ajustes: {
+    titulo: "Impostazioni",
+    seccionIdioma: "Lingua",
+    seccionSobre: "Informazioni",
+    idiomaAuto: "Automatico (lingua del sistema)",
+    disclaimer:
+      "Runas è un'applicazione di intrattenimento. Non è divinazione né previsione del futuro, " +
+      "e le interpretazioni che offre non costituiscono consulenza professionale (medica, legale, " +
+      "finanziaria o psicologica), né sostituiscono il giudizio di ciascuno. È uno spazio per la " +
+      "riflessione, non una fonte di certezze.",
+  },
+};
+
+const textos: Record<IdiomaConcreto, Textos> = { es, en, pt, it };
 
 export function obtenerTextos(idioma: IdiomaConcreto): Textos {
   return textos[idioma] ?? es;

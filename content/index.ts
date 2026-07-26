@@ -1,16 +1,15 @@
 import { paqueteEn } from './en';
 import { paqueteEs } from './es';
+import { paqueteIt } from './it';
 import { paquetePt } from './pt';
 import type { IdiomaConcreto, PaqueteContenido } from './paquete';
 
-// Selector de contenido por idioma. Español, inglés y portugués escritos; el
-// italiano cae a español hasta que se traduzca, así la app nunca queda sin
-// contenido si se elige un idioma todavía incompleto.
+// Selector de contenido por idioma. Los cuatro idiomas están escritos.
 const paquetes: Record<IdiomaConcreto, PaqueteContenido> = {
   es: paqueteEs,
   en: paqueteEn,
   pt: paquetePt,
-  it: paqueteEs,
+  it: paqueteIt,
 };
 
 export function obtenerContenido(idioma: IdiomaConcreto): PaqueteContenido {
