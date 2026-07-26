@@ -21,6 +21,34 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 180,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
+        }
+      ],
+      "expo-asset",
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/VIKING-N.ttf",
+            "./assets/fonts/SpaceMono-Regular.ttf",
+            "./assets/fonts/MetalGothic-DemoVersion-Regular.ttf"
+          ]
+        }
+      ],
+      [
+        "react-native-google-mobile-ads",
+        {
+          "androidAppId": "ca-app-pub-5829308591228932~5466272602"
+        }
+      ]
+    ]
   }
 }
