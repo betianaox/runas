@@ -15,7 +15,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import AvisoPreguntaCorta from '../components/AvisoPreguntaCorta';
 import ContadorGemas from '../components/ContadorGemas';
-import SugerenciaTema from '../components/SugerenciaTema';
 import MarcoDorado from '../components/MarcoDorado';
 import OverlaySinGemas from '../components/OverlaySinGemas';
 import { FUENTE_TITULOS } from '../constants/tipografia';
@@ -50,7 +49,9 @@ export default function PreguntaScreen() {
   const [vistaSorteo, setVistaSorteo] = useState<RunaTirada[]>([]);
   const [mostrarOverlaySinGemas, setMostrarOverlaySinGemas] = useState(false);
   const [mostrarAvisoCorta, setMostrarAvisoCorta] = useState(false);
-  const [temaDescartado, setTemaDescartado] = useState<Tema | null>(null);
+  // Una vez que la persona toca un chip a mano, respetamos su elección y
+  // dejamos de autoajustar el tema por lo que escribe.
+  const [temaTocadoManual, setTemaTocadoManual] = useState(false);
 
   const opacidadTexto = useRef(new Animated.Value(0)).current;
   const intervaloSorteo = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -73,15 +74,17 @@ export default function PreguntaScreen() {
   const preguntaEsValida = analisis.senal !== 'invalida';
   const mostrarHintCorta = pregunta.trim().length > 0 && analisis.senal === 'invalida';
 
-  // Sugerencia de tema: si el texto parece de otro tema que el chip elegido
-  // (y no es 'general', ni uno que la persona ya descartó), la ofrecemos.
-  const temaSugerido =
-    analisis.temaTexto !== 'general' &&
-    analisis.temaTexto !== temaElegido &&
-    analisis.temaTexto !== temaDescartado
-      ? analisis.temaTexto
-      : null;
-  const etiquetaTemaSugerido = TEMAS.find((t) => t.id === temaSugerido)?.etiqueta ?? '';
+  // Autoajuste de tema: si el texto parece de otro tema (y no es 'general'),
+  // cambiamos el chip solo. Los chips siguen ahí para corregir a mano; en
+  // cuanto la persona toca uno, dejamos de pisarle la elección.
+  useEffect(() => {
+    if (temaTocadoManual) {
+      return;
+    }
+    if (analisis.temaTexto !== 'general' && analisis.temaTexto !== temaElegido) {
+      setTemaElegido(analisis.temaTexto);
+    }
+  }, [analisis.temaTexto, temaTocadoManual, temaElegido]);
 
   // Paso de validación: decide si tira directo, avisa por pregunta flaca, o
   // manda al overlay de gemas. La tirada real vive en ejecutarTirada.
@@ -143,7 +146,7 @@ export default function PreguntaScreen() {
     limpiarAnimacion();
     setLectura(null);
     setPregunta('');
-    setTemaDescartado(null);
+    setTemaTocadoManual(false);
   };
 
   return (
@@ -212,7 +215,10 @@ export default function PreguntaScreen() {
                 return (
                   <Pressable
                     key={tema.id}
-                    onPress={() => setTemaElegido(tema.id)}
+                    onPress={() => {
+                      setTemaElegido(tema.id);
+                      setTemaTocadoManual(true);
+                    }}
                     style={[styles.chip, seleccionado && styles.chipSeleccionado]}
                   >
                     <Text
@@ -240,14 +246,6 @@ export default function PreguntaScreen() {
               <Text style={styles.hintCorta}>
                 Escribe una pregunta un poco más larga para poder leerla.
               </Text>
-            )}
-
-            {temaSugerido && (
-              <SugerenciaTema
-                etiqueta={etiquetaTemaSugerido}
-                onAceptar={() => setTemaElegido(temaSugerido)}
-                onDescartar={() => setTemaDescartado(temaSugerido)}
-              />
             )}
 
             <Pressable
