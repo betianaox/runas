@@ -1,4 +1,4 @@
-import type { FragmentosDeTema } from '../types';
+import type { FragmentosDeTema } from '../../types';
 
 // Tema "dinero". Mismas reglas que content/fragmentos/amor.ts: fragmentos
 // cortos componibles, vocabulario variado, sin asumir un nivel de ingresos

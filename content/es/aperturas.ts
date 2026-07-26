@@ -1,4 +1,4 @@
-import type { Tema, Tono } from './types';
+import type { Tema, Tono } from '../types';
 
 // Frase de apertura, antes de la oración combinada de las 3 runas.
 // A propósito neutra, sin metáforas ni contrastes: tiene que funcionar

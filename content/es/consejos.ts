@@ -1,4 +1,4 @@
-import type { Modo, Tema, Tono } from './types';
+import type { Modo, Tema, Tono } from '../types';
 
 // Consejo de cierre, combinado (no por runa individual). Dividido por modo
 // (abierta/cerrada) y, dentro de cada uno, por TONO. 'neutro' es el fallback:

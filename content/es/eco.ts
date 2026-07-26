@@ -1,4 +1,4 @@
-import type { Tiempo } from './types';
+import type { Tiempo } from '../types';
 
 // Frase de "eco": una oración corta y autónoma que reconoce un elemento
 // detectado en la pregunta (una persona mencionada, o una orientación

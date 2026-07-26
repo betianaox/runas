@@ -1,15 +1,24 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 
+import type { IdiomaConcreto } from '../content/paquete';
+
 const CLAVE_ALMACENAMIENTO = 'runas:idioma';
 
-// "auto" = seguir el idioma del sistema. Por ahora esto es solo una
-// preferencia guardada — el contenido sigue sirviéndose en español hasta
-// que se sumen las traducciones (ver runas-arquitectura).
+// "auto" = seguir el idioma del sistema. La preferencia se guarda tal cual; el
+// contenido se sirve según el idioma *concreto* que devuelve resolverIdioma().
 export type Idioma = 'auto' | 'es' | 'en' | 'pt' | 'it';
+
+// Traduce la preferencia a un idioma concreto servible. 'auto' cae a español
+// por ahora; cuando reconstruyamos para publicar, acá se leerá el idioma del
+// sistema (expo-localization) y se mapeará a es/en/pt/it con fallback a es.
+export function resolverIdioma(idioma: Idioma): IdiomaConcreto {
+  return idioma === 'auto' ? 'es' : idioma;
+}
 
 interface IdiomaContextValor {
   idioma: Idioma;
+  idiomaConcreto: IdiomaConcreto;
   establecerIdioma: (idioma: Idioma) => void;
 }
 
@@ -32,7 +41,9 @@ export function IdiomaProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <IdiomaContext.Provider value={{ idioma, establecerIdioma }}>
+    <IdiomaContext.Provider
+      value={{ idioma, idiomaConcreto: resolverIdioma(idioma), establecerIdioma }}
+    >
       {children}
     </IdiomaContext.Provider>
   );

@@ -1,22 +1,9 @@
-import { aperturasAbiertas, aperturasCerradas } from '../content/aperturas';
-import { conectores } from '../content/conectores';
-import { consejos } from '../content/consejos';
-import { ecoTercero, ecoTiempo } from '../content/eco';
-import { amor } from '../content/fragmentos/amor';
-import { dinero } from '../content/fragmentos/dinero';
-import { general } from '../content/fragmentos/general';
-import { trabajo } from '../content/fragmentos/trabajo';
+import { obtenerContenido } from '../content';
 import { nombres } from '../content/nombres';
-import type { FragmentosDeTema, Modo, Tema, Tono } from '../content/types';
+import type { IdiomaConcreto } from '../content/paquete';
+import type { Modo, Tema, Tono } from '../content/types';
 import type { AnalisisPregunta } from './analizarPregunta';
 import { tirarTresRunas, type RunaTirada } from './tirarRunas';
-
-const bancoDeFragmentos: Partial<Record<Tema, FragmentosDeTema>> = {
-  amor,
-  trabajo,
-  dinero,
-  general,
-};
 
 // Verbos para variar cómo se presenta cada runa en el párrafo individual,
 // para no repetir siempre "trae" tres veces seguidas.
@@ -74,7 +61,11 @@ function completarConector(
 // Frase de eco opcional (máximo una): prioriza la mención de un tercero por
 // ser lo más personal; si no hay, usa la marca temporal fuerte. '' si no
 // corresponde ninguna.
-function elegirEco(analisis: AnalisisPregunta): string {
+function elegirEco(
+  analisis: AnalisisPregunta,
+  ecoTercero: string[],
+  ecoTiempo: Record<'pasado' | 'futuro', string[]>,
+): string {
   if (analisis.mencionaTercero) {
     return elegirAlAzar(ecoTercero);
   }
@@ -95,12 +86,19 @@ export interface Lectura {
 // null = todavía no hay contenido escrito para ese tema.
 // El `tema` sale del chip (qué banco de significados usar); el `analisis`
 // aporta cómo la persona formuló la pregunta (modo/tono/tiempo/tercero), que
-// es lo que dirige qué apertura, consejo y eco la acompañan.
-export function armarLectura(tema: Tema, analisis: AnalisisPregunta): Lectura | null {
+// es lo que dirige qué apertura, consejo y eco la acompañan; el `idioma`
+// decide de qué paquete de contenido salen todas las piezas.
+export function armarLectura(
+  tema: Tema,
+  analisis: AnalisisPregunta,
+  idioma: IdiomaConcreto,
+): Lectura | null {
   const { modo, tono } = analisis;
-  const fragmentosDelTema = bancoDeFragmentos[tema];
-  const poolAperturas = modo === 'abierta' ? aperturasAbiertas[tema] : aperturasCerradas;
-  const poolConsejos = consejos[tema]?.[modo];
+  const contenido = obtenerContenido(idioma);
+  const fragmentosDelTema = contenido.fragmentos[tema];
+  const poolAperturas =
+    modo === 'abierta' ? contenido.aperturasAbiertas[tema] : contenido.aperturasCerradas;
+  const poolConsejos = contenido.consejos[tema]?.[modo];
 
   if (!fragmentosDelTema || !poolAperturas || !poolConsejos) {
     return null;
@@ -122,8 +120,8 @@ export function armarLectura(tema: Tema, analisis: AnalisisPregunta): Lectura | 
     .join(' ');
 
   const apertura = elegirAlAzar(aperturasDisponibles);
-  const eco = elegirEco(analisis);
-  const conector = elegirAlAzar(conectores);
+  const eco = elegirEco(analisis, contenido.ecoTercero, contenido.ecoTiempo);
+  const conector = elegirAlAzar(contenido.conectores);
   const consejo = elegirAlAzar(consejosDisponibles);
   const oracionCombinada = completarConector(conector, runas, fragmentosCombinados);
   const parrafoIntegrador = [apertura, eco, oracionCombinada, consejo]

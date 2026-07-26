@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import ContadorGemas from '../components/ContadorGemas';
 import MarcoDorado from '../components/MarcoDorado';
 import { FUENTE_TITULOS } from '../constants/tipografia';
+import { useIdioma } from '../context/IdiomaContext';
 import { imagenes } from '../content/imagenes';
 import { nombres } from '../content/nombres';
 import type { ConsejoDelDia } from '../lib/armarConsejoDelDia';
@@ -21,12 +22,13 @@ type Props = {
 
 export default function ConsejoDelDiaScreen({ navigation }: Props) {
   const [consejo, setConsejo] = useState<ConsejoDelDia | null>(null);
+  const { idiomaConcreto } = useIdioma();
   const { width } = useWindowDimensions();
   const tamRuna = calcularTamanoRuna(width, 1, PADDING_HORIZONTAL, 0);
 
   useEffect(() => {
-    obtenerConsejoDelDia().then(setConsejo);
-  }, []);
+    obtenerConsejoDelDia(idiomaConcreto).then(setConsejo);
+  }, [idiomaConcreto]);
 
   return (
     <View style={styles.background}>

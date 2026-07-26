@@ -1,4 +1,4 @@
-import type { FragmentosDeTema } from '../types';
+import type { FragmentosDeTema } from '../../types';
 
 // Tema "general" — el que usa el clasificador cuando la pregunta no
 // encaja claramente en amor/trabajo/dinero. A propósito más neutro:

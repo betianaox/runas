@@ -1,4 +1,4 @@
-import type { FragmentosDeTema } from '../types';
+import type { FragmentosDeTema } from '../../types';
 
 // Piloto — tema "amor". Cada fragmento es una frase corta pensada para
 // encajar después de un verbo como "trae" / "aporta" / "señala" en los

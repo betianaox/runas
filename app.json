@@ -11,7 +11,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#0C2F58",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
@@ -29,7 +29,7 @@
           "image": "./assets/splash-icon.png",
           "imageWidth": 180,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#0C2F58"
         }
       ],
       "expo-asset",
@@ -37,8 +37,6 @@
         "expo-font",
         {
           "fonts": [
-            "./assets/fonts/VIKING-N.ttf",
-            "./assets/fonts/SpaceMono-Regular.ttf",
             "./assets/fonts/MetalGothic-DemoVersion-Regular.ttf"
           ]
         }

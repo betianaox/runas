@@ -1,4 +1,4 @@
-import type { Posicion, RunaId } from './types';
+import type { Posicion, RunaId } from '../types';
 
 // Consejo del día: una sola runa, mensaje genérico de reflexión — no está
 // atado a un tema (amor/trabajo/dinero) como el contenido de Pregunta.

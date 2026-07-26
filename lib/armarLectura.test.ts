@@ -21,8 +21,8 @@ function analisis(modo: Modo, extra: Partial<AnalisisPregunta> = {}): AnalisisPr
 
 describe('armarLectura', () => {
   it.each(TEMAS)('arma los dos párrafos para %s, en cualquier modo', (tema) => {
-    const lecturaCerrada = armarLectura(tema, analisis('cerrada'));
-    const lecturaAbierta = armarLectura(tema, analisis('abierta'));
+    const lecturaCerrada = armarLectura(tema, analisis('cerrada'), 'es');
+    const lecturaAbierta = armarLectura(tema, analisis('abierta'), 'es');
 
     expect(lecturaCerrada).not.toBeNull();
     expect(lecturaAbierta).not.toBeNull();
@@ -32,31 +32,31 @@ describe('armarLectura', () => {
   });
 
   it.each(TEMAS)('%s: no repite runa dentro de la misma tirada', (tema) => {
-    const lectura = armarLectura(tema, analisis('abierta'))!;
+    const lectura = armarLectura(tema, analisis('abierta'), 'es')!;
     const ids = lectura.runas.map((r) => r.id);
     expect(new Set(ids).size).toBe(3);
   });
 
   it.each(TEMAS)('%s: el párrafo individual menciona las 3 runas por su nombre', (tema) => {
-    const lectura = armarLectura(tema, analisis('cerrada'))!;
+    const lectura = armarLectura(tema, analisis('cerrada'), 'es')!;
     for (const runa of lectura.runas) {
       expect(lectura.parrafoIndividual).toContain(nombres[runa.id]);
     }
   });
 
   it.each(TEMAS)('%s: no deja placeholders {runaN}/{fragN} sin reemplazar', (tema) => {
-    const lectura = armarLectura(tema, analisis('cerrada'))!;
+    const lectura = armarLectura(tema, analisis('cerrada'), 'es')!;
     expect(lectura.parrafoIntegrador).not.toMatch(/\{runa\d\}|\{frag\d\}/);
   });
 
   it('un tono sin contenido propio cae a neutro sin romperse', () => {
     // 'impulso' en cerrada de un tema con pocas semillas: nunca debe quedar vacío.
-    const lectura = armarLectura('dinero', analisis('cerrada', { tono: 'impulso' }))!;
+    const lectura = armarLectura('dinero', analisis('cerrada', { tono: 'impulso' }), 'es')!;
     expect(lectura.parrafoIntegrador.length).toBeGreaterThan(20);
   });
 
   it('inserta una frase de eco cuando la pregunta menciona un tercero', () => {
-    const lectura = armarLectura('amor', analisis('abierta', { mencionaTercero: true }))!;
+    const lectura = armarLectura('amor', analisis('abierta', { mencionaTercero: true }), 'es')!;
     const mencionaOtro = /otra persona|alguien más|vínculo con otra/i.test(
       lectura.parrafoIntegrador,
     );
@@ -67,6 +67,7 @@ describe('armarLectura', () => {
     const lectura = armarLectura(
       'general',
       analisis('abierta', { tiempo: 'pasado', mencionaTercero: false }),
+      'es',
     )!;
     expect(/hacia atrás|ya pasó|dejaste atrás/i.test(lectura.parrafoIntegrador)).toBe(true);
   });

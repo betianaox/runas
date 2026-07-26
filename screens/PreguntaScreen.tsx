@@ -19,6 +19,7 @@ import MarcoDorado from '../components/MarcoDorado';
 import OverlaySinGemas from '../components/OverlaySinGemas';
 import { FUENTE_TITULOS } from '../constants/tipografia';
 import { useGemas } from '../context/GemasContext';
+import { useIdioma } from '../context/IdiomaContext';
 import { imagenes } from '../content/imagenes';
 import { nombres } from '../content/nombres';
 import type { Tema } from '../content/types';
@@ -41,6 +42,7 @@ const DEMORAS_REVELADO_MS = [1100, 1700, 2400];
 
 export default function PreguntaScreen() {
   const { gemas, gastarGema } = useGemas();
+  const { idiomaConcreto } = useIdioma();
   const { width } = useWindowDimensions();
   const [temaElegido, setTemaElegido] = useState<Tema>('amor');
   const [pregunta, setPregunta] = useState('');
@@ -104,7 +106,7 @@ export default function PreguntaScreen() {
   };
 
   const ejecutarTirada = () => {
-    const resultado = armarLectura(temaElegido, analisis);
+    const resultado = armarLectura(temaElegido, analisis, idiomaConcreto);
     if (!resultado) {
       return;
     }
