@@ -2,7 +2,10 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import BotonCerrar from '../components/BotonCerrar';
 import MarcoDorado from '../components/MarcoDorado';
+import { COLORES } from '../constants/colores';
+import { LAYOUT } from '../constants/layout';
 import { useIdioma, type Idioma } from '../context/IdiomaContext';
 import { useTextos } from '../hooks/useTextos';
 import type { RootStackParamList } from '../navigation/types';
@@ -31,9 +34,7 @@ export default function AjustesScreen({ navigation }: Props) {
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.encabezado}>
           <Text style={styles.titulo}>{t.ajustes.titulo}</Text>
-          <Pressable style={styles.botonCerrar} onPress={() => navigation.goBack()} hitSlop={12}>
-            <Text style={styles.botonCerrarTexto}>✕</Text>
-          </Pressable>
+          <BotonCerrar onPress={() => navigation.goBack()} />
         </View>
 
         <ScrollView contentContainerStyle={styles.scroll}>
@@ -65,46 +66,33 @@ export default function AjustesScreen({ navigation }: Props) {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    backgroundColor: '#0C2F58',
+    backgroundColor: COLORES.fondo,
   },
   safeArea: {
     flex: 1,
     // Aire respecto del marco dorado, arriba y abajo.
-    paddingTop: 14,
-    paddingBottom: 14,
+    paddingTop: LAYOUT.aireTop,
+    paddingBottom: LAYOUT.aireTop,
   },
   encabezado: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 24,
-    paddingTop: 6,
+    paddingHorizontal: LAYOUT.aire,
   },
   titulo: {
-    color: '#fff',
+    color: COLORES.marfil,
     fontSize: 24,
     fontWeight: '700',
   },
-  botonCerrar: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    backgroundColor: 'rgba(255, 255, 255, 0.12)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  botonCerrarTexto: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '700',
-  },
   scroll: {
-    paddingHorizontal: 24,
-    paddingVertical: 24,
+    paddingHorizontal: LAYOUT.aire,
+    paddingTop: 20,
+    paddingBottom: 12,
     gap: 12,
   },
   seccionTitulo: {
-    color: '#D9B94A',
+    color: COLORES.oroClaro,
     fontSize: 14,
     fontWeight: '700',
     textTransform: 'uppercase',

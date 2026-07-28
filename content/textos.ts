@@ -8,10 +8,7 @@ export interface Textos {
   home: {
     pregunta: string;
     consejoDelDia: string;
-    bienvenidoTitulo: string;
-    bienvenidoPregunta: string;
-    nombrePlaceholder: string;
-    continuar: string;
+    wiki: string;
   };
   pregunta: {
     titulo: string;
@@ -36,7 +33,19 @@ export interface Textos {
   };
   consejoDelDia: {
     titulo: string;
-    volver: string;
+    vuelveManana: string;
+  };
+  wiki: {
+    titulo: string;
+    palabrasClave: string;
+    derecho: string;
+    invertido: string;
+    simbolismo: string;
+    proximamente: string;
+    gratis: string;
+    desbloquearTitulo: string;
+    desbloquearTexto: string;
+    desbloquearBoton: string;
   };
   ajustes: {
     titulo: string;
@@ -51,10 +60,7 @@ const es: Textos = {
   home: {
     pregunta: 'Pregunta',
     consejoDelDia: 'Consejo del día',
-    bienvenidoTitulo: 'Bienvenido a Runas',
-    bienvenidoPregunta: '¿Cómo te llamas?',
-    nombrePlaceholder: 'Tu nombre',
-    continuar: 'Continuar',
+    wiki: 'Aprende las runas',
   },
   pregunta: {
     titulo: '¿Sobre qué quieres preguntar?',
@@ -80,7 +86,19 @@ const es: Textos = {
   },
   consejoDelDia: {
     titulo: 'Consejo del día',
-    volver: 'Volver',
+    vuelveManana: 'Vuelve mañana por tu próximo consejo',
+  },
+  wiki: {
+    titulo: 'Aprende las runas',
+    palabrasClave: 'Palabras clave',
+    derecho: 'Derecho',
+    invertido: 'Invertida',
+    simbolismo: 'Simbolismo',
+    proximamente: 'Contenido próximamente',
+    gratis: 'De regalo',
+    desbloquearTitulo: 'Desbloquea la Wiki de hoy',
+    desbloquearTexto: 'Mira un video corto para destrabar todas las runas por hoy',
+    desbloquearBoton: '🎬 Mira un video y desbloquea todas',
   },
   ajustes: {
     titulo: 'Ajustes',
@@ -99,10 +117,7 @@ const en: Textos = {
   home: {
     pregunta: 'Ask a question',
     consejoDelDia: 'Daily advice',
-    bienvenidoTitulo: 'Welcome to Runas',
-    bienvenidoPregunta: "What's your name?",
-    nombrePlaceholder: 'Your name',
-    continuar: 'Continue',
+    wiki: 'Learn the runes',
   },
   pregunta: {
     titulo: 'What would you like to ask about?',
@@ -128,7 +143,19 @@ const en: Textos = {
   },
   consejoDelDia: {
     titulo: 'Daily advice',
-    volver: 'Back',
+    vuelveManana: 'Come back tomorrow for your next advice',
+  },
+  wiki: {
+    titulo: 'Learn the runes',
+    palabrasClave: 'Keywords',
+    derecho: 'Upright',
+    invertido: 'Reversed',
+    simbolismo: 'Symbolism',
+    proximamente: 'Content coming soon',
+    gratis: 'Free sample',
+    desbloquearTitulo: "Unlock today's Wiki",
+    desbloquearTexto: 'Watch a short video to unlock every rune for today',
+    desbloquearBoton: '🎬 Watch a video to unlock all',
   },
   ajustes: {
     titulo: 'Settings',
@@ -147,10 +174,7 @@ const pt: Textos = {
   home: {
     pregunta: 'Fazer uma pergunta',
     consejoDelDia: 'Conselho do dia',
-    bienvenidoTitulo: 'Bem-vindo ao Runas',
-    bienvenidoPregunta: 'Como você se chama?',
-    nombrePlaceholder: 'Seu nome',
-    continuar: 'Continuar',
+    wiki: 'Aprenda as runas',
   },
   pregunta: {
     titulo: 'Sobre o que você quer perguntar?',
@@ -176,7 +200,19 @@ const pt: Textos = {
   },
   consejoDelDia: {
     titulo: 'Conselho do dia',
-    volver: 'Voltar',
+    vuelveManana: 'Volte amanhã para o próximo conselho',
+  },
+  wiki: {
+    titulo: 'Aprenda as runas',
+    palabrasClave: 'Palavras-chave',
+    derecho: 'Direita',
+    invertido: 'Invertida',
+    simbolismo: 'Simbolismo',
+    proximamente: 'Conteúdo em breve',
+    gratis: 'De presente',
+    desbloquearTitulo: 'Desbloqueie a Wiki de hoje',
+    desbloquearTexto: 'Assista a um vídeo curto para destravar todas as runas por hoje',
+    desbloquearBoton: '🎬 Assista a um vídeo e desbloqueie todas',
   },
   ajustes: {
     titulo: 'Configurações',
@@ -195,10 +231,7 @@ const it: Textos = {
   home: {
     pregunta: "Fai una domanda",
     consejoDelDia: "Consiglio del giorno",
-    bienvenidoTitulo: "Benvenuto in Runas",
-    bienvenidoPregunta: "Come ti chiami?",
-    nombrePlaceholder: "Il tuo nome",
-    continuar: "Continua",
+    wiki: "Impara le rune",
   },
   pregunta: {
     titulo: "Su cosa vuoi fare la domanda?",
@@ -224,7 +257,19 @@ const it: Textos = {
   },
   consejoDelDia: {
     titulo: "Consiglio del giorno",
-    volver: "Indietro",
+    vuelveManana: "Torna domani per il prossimo consiglio",
+  },
+  wiki: {
+    titulo: "Impara le rune",
+    palabrasClave: "Parole chiave",
+    derecho: "Dritto",
+    invertido: "Rovesciata",
+    simbolismo: "Simbolismo",
+    proximamente: "Contenuto in arrivo",
+    gratis: "In regalo",
+    desbloquearTitulo: "Sblocca la Wiki di oggi",
+    desbloquearTexto: "Guarda un breve video per sbloccare tutte le rune per oggi",
+    desbloquearBoton: "🎬 Guarda un video e sblocca tutte",
   },
   ajustes: {
     titulo: "Impostazioni",

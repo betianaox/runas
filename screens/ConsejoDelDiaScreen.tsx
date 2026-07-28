@@ -1,10 +1,13 @@
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useState } from 'react';
-import { Image, Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { Image, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import BotonCerrar from '../components/BotonCerrar';
 import ContadorGemas from '../components/ContadorGemas';
 import MarcoDorado from '../components/MarcoDorado';
+import { COLORES } from '../constants/colores';
+import { LAYOUT } from '../constants/layout';
 import { FUENTE_TITULOS } from '../constants/tipografia';
 import { useIdioma } from '../context/IdiomaContext';
 import { useTextos } from '../hooks/useTextos';
@@ -36,7 +39,10 @@ export default function ConsejoDelDiaScreen({ navigation }: Props) {
     <View style={styles.background}>
       <MarcoDorado />
       <SafeAreaView style={styles.safeArea}>
-        <ContadorGemas />
+        <View style={styles.encabezado}>
+          <ContadorGemas />
+          <BotonCerrar onPress={() => navigation.goBack()} />
+        </View>
 
         <View style={styles.contenido}>
           <Text style={styles.titulo}>{t.consejoDelDia.titulo}</Text>
@@ -54,12 +60,10 @@ export default function ConsejoDelDiaScreen({ navigation }: Props) {
               <Text style={styles.nombreRuna}>{nombres[consejo.runa.id]}</Text>
 
               <Text style={styles.textoConsejo}>{consejo.texto}</Text>
+
+              <Text style={styles.vuelveManana}>{t.consejoDelDia.vuelveManana}</Text>
             </>
           )}
-
-          <Pressable style={styles.botonVolver} onPress={() => navigation.goBack()}>
-            <Text style={styles.botonVolverTexto}>{t.consejoDelDia.volver}</Text>
-          </Pressable>
         </View>
       </SafeAreaView>
     </View>
@@ -69,13 +73,19 @@ export default function ConsejoDelDiaScreen({ navigation }: Props) {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    backgroundColor: '#0C2F58',
+    backgroundColor: COLORES.fondo,
   },
   safeArea: {
     flex: 1,
     // Aire respecto del marco dorado, arriba y abajo.
-    paddingTop: 14,
-    paddingBottom: 14,
+    paddingTop: LAYOUT.aireTop,
+    paddingBottom: LAYOUT.aireTop,
+  },
+  encabezado: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    paddingHorizontal: LAYOUT.aire,
   },
   contenido: {
     flex: 1,
@@ -85,7 +95,7 @@ const styles = StyleSheet.create({
     gap: 20,
   },
   titulo: {
-    color: '#D9B94A',
+    color: COLORES.oroClaro,
     fontSize: 26,
     fontWeight: '700',
   },
@@ -94,7 +104,7 @@ const styles = StyleSheet.create({
   },
   nombreRuna: {
     fontFamily: FUENTE_TITULOS,
-    color: '#D9B94A',
+    color: COLORES.oroClaro,
     fontSize: 34,
   },
   textoConsejo: {
@@ -103,16 +113,11 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     textAlign: 'center',
   },
-  botonVolver: {
-    backgroundColor: '#C9A227',
-    borderRadius: 16,
-    paddingVertical: 16,
-    paddingHorizontal: 32,
-    marginTop: 12,
-  },
-  botonVolverTexto: {
-    color: '#1a1a2e',
-    fontSize: 16,
-    fontWeight: '700',
+  vuelveManana: {
+    color: 'rgba(255, 255, 255, 0.5)',
+    fontSize: 13,
+    fontStyle: 'italic',
+    textAlign: 'center',
+    marginTop: 4,
   },
 });

@@ -14,9 +14,13 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import AvisoPreguntaCorta from '../components/AvisoPreguntaCorta';
+import BotonCerrar from '../components/BotonCerrar';
+import BotonVoz from '../components/BotonVoz';
 import ContadorGemas from '../components/ContadorGemas';
 import MarcoDorado from '../components/MarcoDorado';
 import OverlaySinGemas from '../components/OverlaySinGemas';
+import { COLORES } from '../constants/colores';
+import { LAYOUT } from '../constants/layout';
 import { FUENTE_TITULOS } from '../constants/tipografia';
 import { useGemas } from '../context/GemasContext';
 import { useIdioma } from '../context/IdiomaContext';
@@ -28,6 +32,8 @@ import { analizarPregunta } from '../lib/analizarPregunta';
 import { armarLectura, type Lectura } from '../lib/armarLectura';
 import { calcularTamanoRuna } from '../lib/tamanoRuna';
 import { tirarUnaRuna, type RunaTirada } from '../lib/tirarRunas';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import type { RootStackParamList } from '../navigation/types';
 
 // General primero y como default: si la pregunta no permite detectar un tema,
 // se queda en general (respuesta genérica) en vez de contestar de amor a algo
@@ -39,7 +45,11 @@ const GAP_RUNAS = 16;
 const INTERVALO_SORTEO_MS = 90;
 const DEMORAS_REVELADO_MS = [1100, 1700, 2400];
 
-export default function PreguntaScreen() {
+type Props = {
+  navigation: NativeStackNavigationProp<RootStackParamList, 'Pregunta'>;
+};
+
+export default function PreguntaScreen({ navigation }: Props) {
   const { gemas, gastarGema } = useGemas();
   const { idiomaConcreto } = useIdioma();
   const t = useTextos();
@@ -161,7 +171,11 @@ export default function PreguntaScreen() {
     <View style={styles.background}>
       <MarcoDorado />
       <SafeAreaView style={styles.safeArea}>
-        <ContadorGemas />
+        <View style={styles.encabezado}>
+          <ContadorGemas />
+          {/* Cierre explícito a la Home desde el arranque de la consulta. */}
+          <BotonCerrar onPress={() => navigation.popToTop()} />
+        </View>
 
         {lectura ? (
           <View style={styles.resultadoContenedor}>
@@ -207,11 +221,19 @@ export default function PreguntaScreen() {
               />
             </Animated.View>
 
-            <Pressable style={styles.botonPrincipal} onPress={onNuevaPregunta}>
-              <Text style={styles.botonPrincipalTexto} numberOfLines={1}>
-                {t.pregunta.hacerOtra}
-              </Text>
-            </Pressable>
+            <View style={styles.filaAcciones}>
+              <BotonVoz
+                texto={[lectura.parrafoIndividual, lectura.parrafoIntegrador].join('\n\n')}
+              />
+              <Pressable
+                style={[styles.botonPrincipal, styles.botonPrincipalAjustable]}
+                onPress={onNuevaPregunta}
+              >
+                <Text style={styles.botonPrincipalTexto} numberOfLines={1}>
+                  {t.pregunta.hacerOtra}
+                </Text>
+              </Pressable>
+            </View>
           </View>
         ) : (
           <ScrollView contentContainerStyle={styles.scroll} keyboardShouldPersistTaps="handled">
@@ -294,13 +316,20 @@ export default function PreguntaScreen() {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    backgroundColor: '#0C2F58',
+    backgroundColor: COLORES.fondo,
   },
   safeArea: {
     flex: 1,
     // Aire respecto del marco dorado, arriba y abajo (la home no lleva marco).
-    paddingTop: 14,
-    paddingBottom: 14,
+    paddingTop: LAYOUT.aireTop,
+    paddingBottom: LAYOUT.aireTop,
+  },
+  encabezado: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    // Aire lateral para que el contador y la ✕ no queden sobre el marco dorado.
+    paddingHorizontal: LAYOUT.aire,
   },
   scroll: {
     flexGrow: 1,
@@ -310,7 +339,7 @@ const styles = StyleSheet.create({
     gap: 24,
   },
   titulo: {
-    color: '#D9B94A',
+    color: COLORES.oroClaro,
     fontSize: 22,
     fontWeight: '700',
     textAlign: 'center',
@@ -325,22 +354,25 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     paddingVertical: 12,
     paddingHorizontal: 8,
-    backgroundColor: 'rgba(255, 255, 255, 0.12)',
+    // Mismo lenguaje transparente que el resto de los botones: fondo oscuro
+    // translúcido y borde dorado tenue. Sin seleccionar, el borde va tenue.
+    backgroundColor: 'rgba(12, 47, 88, 0.5)',
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.3)',
+    borderColor: 'rgba(201, 162, 39, 0.35)',
     alignItems: 'center',
   },
   chipSeleccionado: {
-    backgroundColor: '#C9A227',
-    borderColor: '#C9A227',
+    // Seleccionado: un velo dorado y el borde pleno, sin llenarlo de oro macizo.
+    backgroundColor: 'rgba(201, 162, 39, 0.18)',
+    borderColor: 'rgba(201, 162, 39, 0.9)',
   },
   chipTexto: {
-    color: '#fff',
+    color: COLORES.marfil,
     fontSize: 12,
     fontWeight: '600',
   },
   chipTextoSeleccionado: {
-    color: '#1a1a2e',
+    color: COLORES.oroClaro,
   },
   input: {
     backgroundColor: 'rgba(255, 255, 255, 0.12)',
@@ -361,12 +393,25 @@ const styles = StyleSheet.create({
     marginTop: -8,
   },
   botonPrincipal: {
-    backgroundColor: '#C9A227',
+    // Botón transparente: translúcido oscuro + borde dorado + texto marfil,
+    // en vez del dorado sólido anterior.
+    backgroundColor: 'rgba(12, 47, 88, 0.66)',
     borderRadius: 16,
+    borderWidth: 1,
+    borderColor: COLORES.oro,
     paddingVertical: 20,
     paddingHorizontal: 20,
     alignItems: 'center',
     width: '100%',
+  },
+  filaAcciones: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+  },
+  botonPrincipalAjustable: {
+    flex: 1,
+    width: undefined,
   },
   botonConPill: {
     flexDirection: 'row',
@@ -377,18 +422,18 @@ const styles = StyleSheet.create({
     opacity: 0.4,
   },
   botonPrincipalTexto: {
-    color: '#1a1a2e',
+    color: COLORES.marfil,
     fontSize: 17,
     fontWeight: '700',
   },
   pillCosto: {
-    backgroundColor: 'rgba(0, 0, 0, 0.18)',
+    backgroundColor: 'rgba(245, 239, 224, 0.14)',
     borderRadius: 999,
     paddingVertical: 4,
     paddingHorizontal: 10,
   },
   pillCostoTexto: {
-    color: '#1a1a2e',
+    color: COLORES.marfil,
     fontSize: 14,
     fontWeight: '700',
   },
@@ -413,7 +458,7 @@ const styles = StyleSheet.create({
   },
   nombreRuna: {
     fontFamily: FUENTE_TITULOS,
-    color: '#D9B94A',
+    color: COLORES.oroClaro,
     fontSize: 30,
   },
   nombreRunaOculto: {

@@ -1,13 +1,13 @@
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useState } from 'react';
-import { ImageBackground, Modal, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import ContadorGemas from '../components/ContadorGemas';
 import OverlaySinGemas from '../components/OverlaySinGemas';
+import { COLORES } from '../constants/colores';
 import { FUENTE_TITULOS } from '../constants/tipografia';
 import { useGemas } from '../context/GemasContext';
-import { useUsuario } from '../context/UsuarioContext';
 import { useTextos } from '../hooks/useTextos';
 import type { RootStackParamList } from '../navigation/types';
 
@@ -17,17 +17,8 @@ type Props = {
 
 export default function HomeScreen({ navigation }: Props) {
   const { gemas } = useGemas();
-  const { nombre, establecerNombre } = useUsuario();
   const t = useTextos();
   const [mostrarOverlaySinGemas, setMostrarOverlaySinGemas] = useState(false);
-  const [nombreIngresado, setNombreIngresado] = useState('');
-
-  const onContinuarBienvenida = () => {
-    if (!nombreIngresado.trim()) {
-      return;
-    }
-    establecerNombre(nombreIngresado);
-  };
 
   const onPresionarPregunta = () => {
     if (gemas > 0) {
@@ -69,6 +60,10 @@ export default function HomeScreen({ navigation }: Props) {
             >
               <Text style={styles.botonTexto}>{t.home.consejoDelDia}</Text>
             </Pressable>
+
+            <Pressable style={styles.boton} onPress={() => navigation.navigate('Wiki')}>
+              <Text style={styles.botonTexto}>{t.home.wiki}</Text>
+            </Pressable>
           </View>
         </View>
       </SafeAreaView>
@@ -77,31 +72,6 @@ export default function HomeScreen({ navigation }: Props) {
         visible={mostrarOverlaySinGemas}
         onCerrar={() => setMostrarOverlaySinGemas(false)}
       />
-
-      <Modal visible={!nombre} transparent animationType="fade">
-        <View style={styles.overlayFondo}>
-          <View style={styles.overlayCard}>
-            <Text style={styles.overlayTitulo}>{t.home.bienvenidoTitulo}</Text>
-            <Text style={styles.overlayTexto}>{t.home.bienvenidoPregunta}</Text>
-            <TextInput
-              style={styles.inputNombre}
-              placeholder={t.home.nombrePlaceholder}
-              placeholderTextColor="rgba(0,0,0,0.4)"
-              value={nombreIngresado}
-              onChangeText={setNombreIngresado}
-              autoFocus
-              maxLength={30}
-            />
-            <Pressable
-              style={[styles.botonContinuar, !nombreIngresado.trim() && styles.botonDeshabilitado]}
-              onPress={onContinuarBienvenida}
-              disabled={!nombreIngresado.trim()}
-            >
-              <Text style={styles.botonContinuarTexto}>{t.home.continuar}</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
     </ImageBackground>
   );
 }
@@ -117,10 +87,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
+    // Home no tiene marco dorado: padding chico, pegado al borde de pantalla.
+    paddingTop: 10,
+    paddingHorizontal: 24,
   },
   botonAjustes: {
-    marginTop: 10,
-    marginRight: 28,
     width: 40,
     height: 40,
     borderRadius: 20,
@@ -153,8 +124,12 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   boton: {
-    backgroundColor: '#0C2F58',
+    // Botón transparente: translúcido oscuro + borde dorado + texto marfil,
+    // en vez del navy sólido anterior.
+    backgroundColor: 'rgba(12, 47, 88, 0.66)',
     borderRadius: 16,
+    borderWidth: 1,
+    borderColor: COLORES.oro,
     paddingVertical: 18,
     alignItems: 'center',
   },
@@ -162,57 +137,5 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     fontWeight: '600',
-  },
-  overlayFondo: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.6)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 32,
-  },
-  overlayCard: {
-    backgroundColor: '#fff',
-    borderRadius: 20,
-    padding: 28,
-    width: '100%',
-    alignItems: 'center',
-    gap: 16,
-  },
-  overlayTitulo: {
-    fontSize: 20,
-    fontWeight: '700',
-  },
-  overlayTexto: {
-    fontSize: 15,
-    textAlign: 'center',
-    color: '#333',
-  },
-  botonContinuar: {
-    backgroundColor: '#C9A227',
-    borderRadius: 14,
-    paddingVertical: 14,
-    paddingHorizontal: 24,
-    marginTop: 4,
-    width: '100%',
-    alignItems: 'center',
-  },
-  botonDeshabilitado: {
-    opacity: 0.4,
-  },
-  botonContinuarTexto: {
-    color: '#1a1a2e',
-    fontSize: 16,
-    fontWeight: '700',
-  },
-  inputNombre: {
-    width: '100%',
-    backgroundColor: '#F2F2F2',
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: '#ddd',
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    fontSize: 16,
-    color: '#1a1a2e',
   },
 });
