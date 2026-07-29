@@ -77,21 +77,20 @@ const styles = StyleSheet.create({
   },
   safeArea: {
     flex: 1,
-    // Aire respecto del marco dorado, arriba y abajo.
+    // Aire respecto del marco dorado por los cuatro lados.
     paddingTop: LAYOUT.aireTop,
     paddingBottom: LAYOUT.aireTop,
+    paddingHorizontal: LAYOUT.aire,
   },
   encabezado: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    paddingHorizontal: LAYOUT.aire,
   },
   contenido: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: PADDING_HORIZONTAL,
     gap: 20,
   },
   titulo: {

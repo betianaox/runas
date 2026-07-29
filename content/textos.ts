@@ -60,7 +60,7 @@ const es: Textos = {
   home: {
     pregunta: 'Pregunta',
     consejoDelDia: 'Consejo del día',
-    wiki: 'Aprende las runas',
+    wiki: 'Aprende',
   },
   pregunta: {
     titulo: '¿Sobre qué quieres preguntar?',
@@ -117,7 +117,7 @@ const en: Textos = {
   home: {
     pregunta: 'Ask a question',
     consejoDelDia: 'Daily advice',
-    wiki: 'Learn the runes',
+    wiki: 'Learn',
   },
   pregunta: {
     titulo: 'What would you like to ask about?',
@@ -174,7 +174,7 @@ const pt: Textos = {
   home: {
     pregunta: 'Fazer uma pergunta',
     consejoDelDia: 'Conselho do dia',
-    wiki: 'Aprenda as runas',
+    wiki: 'Aprenda',
   },
   pregunta: {
     titulo: 'Sobre o que você quer perguntar?',
@@ -231,7 +231,7 @@ const it: Textos = {
   home: {
     pregunta: "Fai una domanda",
     consejoDelDia: "Consiglio del giorno",
-    wiki: "Impara le rune",
+    wiki: "Impara",
   },
   pregunta: {
     titulo: "Su cosa vuoi fare la domanda?",

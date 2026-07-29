@@ -320,21 +320,19 @@ const styles = StyleSheet.create({
   },
   safeArea: {
     flex: 1,
-    // Aire respecto del marco dorado, arriba y abajo (la home no lleva marco).
+    // Aire respecto del marco dorado por los cuatro lados.
     paddingTop: LAYOUT.aireTop,
     paddingBottom: LAYOUT.aireTop,
+    paddingHorizontal: LAYOUT.aire,
   },
   encabezado: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    // Aire lateral para que el contador y la ✕ no queden sobre el marco dorado.
-    paddingHorizontal: LAYOUT.aire,
   },
   scroll: {
     flexGrow: 1,
     justifyContent: 'center',
-    paddingHorizontal: PADDING_HORIZONTAL,
     paddingVertical: 24,
     gap: 24,
   },
@@ -439,7 +437,7 @@ const styles = StyleSheet.create({
   },
   resultadoContenedor: {
     flex: 1,
-    paddingHorizontal: PADDING_HORIZONTAL + 8,
+    paddingHorizontal: 8,
     paddingTop: 20,
     paddingBottom: 24,
     gap: 16,

@@ -103,23 +103,23 @@ const styles = StyleSheet.create({
   },
   safeArea: {
     flex: 1,
+    // Aire respecto del marco dorado por los cuatro lados.
     paddingTop: LAYOUT.aireTop,
     paddingBottom: 14,
+    paddingHorizontal: LAYOUT.aire,
   },
   encabezado: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: LAYOUT.aire,
   },
   titulo: {
-    color: COLORES.marfil,
+    color: COLORES.oroClaro,
     fontSize: 24,
     fontWeight: '700',
   },
   botonDesbloquear: {
     marginTop: 14,
-    marginHorizontal: LAYOUT.aire,
     backgroundColor: 'rgba(12, 47, 88, 0.66)',
     borderWidth: 1,
     borderColor: COLORES.oro,
@@ -135,7 +135,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   scroll: {
-    paddingHorizontal: PADDING,
     paddingTop: 16,
     paddingBottom: 28,
   },

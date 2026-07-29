@@ -70,23 +70,22 @@ const styles = StyleSheet.create({
   },
   safeArea: {
     flex: 1,
-    // Aire respecto del marco dorado, arriba y abajo.
+    // Aire respecto del marco dorado por los cuatro lados.
     paddingTop: LAYOUT.aireTop,
     paddingBottom: LAYOUT.aireTop,
+    paddingHorizontal: LAYOUT.aire,
   },
   encabezado: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: LAYOUT.aire,
   },
   titulo: {
-    color: COLORES.marfil,
+    color: COLORES.oroClaro,
     fontSize: 24,
     fontWeight: '700',
   },
   scroll: {
-    paddingHorizontal: LAYOUT.aire,
     paddingTop: 20,
     paddingBottom: 12,
     gap: 12,

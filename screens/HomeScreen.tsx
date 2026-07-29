@@ -1,3 +1,4 @@
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useState } from 'react';
 import { ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native';
@@ -51,18 +52,21 @@ export default function HomeScreen({ navigation }: Props) {
 
           <View style={styles.botonera}>
             <Pressable style={styles.boton} onPress={onPresionarPregunta}>
+              <MaterialCommunityIcons name="crystal-ball" size={22} color="#fff" />
               <Text style={styles.botonTexto}>{t.home.pregunta}</Text>
+            </Pressable>
+
+            <Pressable style={styles.boton} onPress={() => navigation.navigate('Wiki')}>
+              <MaterialCommunityIcons name="book-open-variant" size={22} color="#fff" />
+              <Text style={styles.botonTexto}>{t.home.wiki}</Text>
             </Pressable>
 
             <Pressable
               style={styles.boton}
               onPress={() => navigation.navigate('ConsejoDelDia')}
             >
+              <MaterialCommunityIcons name="lightbulb-on-outline" size={22} color="#fff" />
               <Text style={styles.botonTexto}>{t.home.consejoDelDia}</Text>
-            </Pressable>
-
-            <Pressable style={styles.boton} onPress={() => navigation.navigate('Wiki')}>
-              <Text style={styles.botonTexto}>{t.home.wiki}</Text>
             </Pressable>
           </View>
         </View>
@@ -131,7 +135,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: COLORES.oro,
     paddingVertical: 18,
+    flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
+    gap: 10,
   },
   botonTexto: {
     color: '#fff',

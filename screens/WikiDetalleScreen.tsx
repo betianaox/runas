@@ -102,17 +102,17 @@ const styles = StyleSheet.create({
   },
   safeArea: {
     flex: 1,
+    // Aire respecto del marco dorado por los cuatro lados.
     paddingTop: LAYOUT.aireTop,
     paddingBottom: 14,
+    paddingHorizontal: LAYOUT.aire,
   },
   encabezado: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: LAYOUT.aire,
   },
   scroll: {
-    paddingHorizontal: LAYOUT.aire,
     paddingTop: 8,
     paddingBottom: 32,
   },
